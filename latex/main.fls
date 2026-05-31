@@ -139,34 +139,28 @@ INPUT C:\Users\K\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\tex\latex\base\omscmr.fd
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\tex\latex\base\omscmr.fd
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\tex\latex\base\omscmr.fd
-INPUT .\img\schema-er.pdf
-INPUT .\img\schema-er.pdf
-INPUT .\img\schema-er.pdf
-INPUT .\img\schema-er.pdf
-INPUT .\img\schema-er.pdf
+INPUT .\img\ER Schema.pdf
+INPUT .\img\ER Schema.pdf
+INPUT .\img\ER Schema.pdf
+INPUT .\img\ER Schema.pdf
+INPUT .\img\ER Schema.pdf
+INPUT .\img\ER Schema.pdf
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti10.tfm
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1095.tfm
-INPUT .\img\Removed Generalizations ER Schema.pdf
-INPUT .\img\Removed Generalizations ER Schema.pdf
-INPUT .\img\Removed Generalizations ER Schema.pdf
-INPUT .\img\Removed Generalizations ER Schema.pdf
-INPUT .\img\Removed Generalizations ER Schema.pdf
-INPUT .\img\Removed Generalizations ER Schema.pdf
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt8.tfm
-INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx8.tfm
-INPUT .\img\redundancy-er-schema.pdf
-INPUT .\img\redundancy-er-schema.pdf
-INPUT .\img\redundancy-er-schema.pdf
-INPUT .\img\redundancy-er-schema.pdf
-INPUT .\img\redundancy-er-schema.pdf
+INPUT .\img\Removed Generalizations ER Schema.pdf
+INPUT .\img\Removed Generalizations ER Schema.pdf
+INPUT .\img\Removed Generalizations ER Schema.pdf
+INPUT .\img\Removed Generalizations ER Schema.pdf
+INPUT .\img\Removed Generalizations ER Schema.pdf
+INPUT .\img\Removed Generalizations ER Schema.pdf
+INPUT .\img\Redundancy ER Schema.pdf
+INPUT .\img\Redundancy ER Schema.pdf
+INPUT .\img\Redundancy ER Schema.pdf
+INPUT .\img\Redundancy ER Schema.pdf
+INPUT .\img\Redundancy ER Schema.pdf
+INPUT .\img\Redundancy ER Schema.pdf
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx10.tfm
-INPUT .\img\ER_Diagram.png
-INPUT .\img\ER_Diagram.png
-INPUT .\img\ER_Diagram.png
-INPUT .\img\ER_Diagram.png
-INPUT .\img\ER_Diagram.png
-INPUT .\img\ER_Diagram.png
-INPUT .\img\ER_Diagram.png
 INPUT main.aux
 INPUT C:\Users\K\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1095.pk
 INPUT C:\Users\K\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1095.pk
@@ -174,8 +168,6 @@ INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cm
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx10.pfb
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
-INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx8.pfb
-INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx8.pfb
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\K\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb

@@ -426,7 +426,7 @@ Dallo schema E-R si possono notare le seguenti ridondanze:
 
 Al fine di dettagliare i vincoli di partecipazione e di ciclo di vita non esprimibili graficamente nel diagramma E-R, viene di seguito definito il comportamento del sistema in caso di eliminazione di un'istanza per ciascuna entità.
 
-\begin{description}[leftmargin=*]
+\begin{description}[leftmargin=0pt]
 
     \item[Eliminazione di un docente:] \hfill \\
     La rimozione di un docente è vincolata ai suoi corsi: può essere eseguita esclusivamente se il docente non risulta titolare di alcun corso attivo. In caso contrario, l'operazione è bloccata; per procedere alla cancellazione, è necessario assegnare preventivamente un nuovo docente ai corsi interessati.
@@ -771,7 +771,7 @@ Si conclude che il mantenimento della ridondanza risulta conveniente, in quanto 
 
 Di seguito si riporta lo schema logico relazionale derivato dallo schema E-R ristrutturato, integrato con le politiche di gestione delle cancellazioni sulle chiavi esterne.
 
-\begin{description}[leftmargin=*]
+\begin{description}[leftmargin=0pt]
 
 \item[\texttt{Docente(CF, nome, cognome, email, telefono)}] \hfill \\
 \textbf{PK:} CF \\
@@ -795,7 +795,7 @@ Di seguito si riporta lo schema logico relazionale derivato dallo schema E-R ris
 \textbf{VNN:} \{n\textsuperscript{o} iscritti, responsabile\} \\
 \textbf{FK}: \{(responsabile $\rightarrow$ Docente(CF))\} \\
 \textbf{Politiche di Integrità Referenziale:}
-\begin{description}[leftmargin=*]
+\begin{description}[leftmargin=0pt]
     \item Non è possibile eliminare un docente se ricopre la carica di responsabile del corso di laurea. La rimozione è bloccata finché non viene nominato un sostituto.
 \end{description}
 
@@ -810,7 +810,7 @@ Di seguito si riporta lo schema logico relazionale derivato dallo schema E-R ris
 \textbf{VNN:} \{docente\} \\
 \textbf{FK:} \{(corso di laurea $\rightarrow$ Corso di Laurea(nome)), (docente $\rightarrow$ Docente(CF))\} \\
 \textbf{Politiche di Integrità Referenziale:}
-\begin{description}[leftmargin=*]
+\begin{description}[leftmargin=0pt]
     \item La cancellazione di un corso di laurea comporta la rimozione automatica di tutti i relativi corsi afferenti.
     \item La rimozione di un docente è bloccata. Il corso deve essere riassegnato prima di poter cancellare il docente.
 \end{description}
@@ -820,7 +820,7 @@ Di seguito si riporta lo schema logico relazionale derivato dallo schema E-R ris
 \textbf{PK:} (studente, corso di laurea) \\
 \textbf{FK:} \{(studente $\rightarrow$ Studente(CF)), (corso di laurea $\rightarrow$ Corso di Laurea(nome))\} \\
 \textbf{Politiche di Integrità Referenziale:}
-\begin{description}[leftmargin=*]
+\begin{description}[leftmargin=0pt]
     \item La cancellazione di uno studente comporta la rimozione di tutte le sue iscrizioni.
     \item La rimozione di un corso di laurea comporta la cancellazione di tutte le iscrizioni relative a tale corso di laurea.
 \end{description}
@@ -832,7 +832,7 @@ Di seguito si riporta lo schema logico relazionale derivato dallo schema E-R ris
 \textbf{UNIQUE:} \{indirizzo, telefono\} \\
 \textbf{FK:} (corso di laurea $\rightarrow$ Corso di Laurea(nome)) \\
 \textbf{Politiche di Integrità Referenziale:}
-\begin{description}[leftmargin=*]
+\begin{description}[leftmargin=0pt]
     \item In caso di rimozione di un corso di laurea, l'assegnazione dei relativi edifici deve essere annullata, in modo da renderli nuovamente disponibili per altri corsi di laurea.
 \end{description}
 
@@ -847,7 +847,7 @@ Di seguito si riporta lo schema logico relazionale derivato dallo schema E-R ris
 \textbf{VNN:} \{piano, n\textsuperscript{o} posti\} \\
 \textbf{FK:} \{(edificio $\rightarrow$ Edificio(nome))\} \\
 \textbf{Politiche di Integrità Referenziale:}
-\begin{description}[leftmargin=*]
+\begin{description}[leftmargin=0pt]
     \item L'eliminazione di un edificio comporta la cancellazione automatica di tutte le sue aule.
 \end{description}
 
@@ -858,7 +858,7 @@ Di seguito si riporta lo schema logico relazionale derivato dallo schema E-R ris
 \textbf{VNN:} \{aula, edificio\} \\
 \textbf{FK:} \{(corso, corso di laurea $\rightarrow$ Corso(nome, corso di laurea)), (aula, edificio $\rightarrow$ Aula(nome, edificio))\} \\
 \textbf{Politiche di Integrità Referenziale:}
-\begin{description}[leftmargin=*]
+\begin{description}[leftmargin=0pt]
     \item La cancellazione di un singolo corso rimuove automaticamente tutte le sue lezioni programmate nel calendario.
     \item La rimozione di un'aula è bloccata qualora vi siano lezioni pianificate al suo interno, forzando lo spostamento delle lezioni in altre aule.
 \end{description}
