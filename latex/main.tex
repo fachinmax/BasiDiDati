@@ -1,6 +1,8 @@
 \documentclass[a4paper,11pt]{article}
 
 \usepackage[utf8]{inputenc}
+% Handle common problematic Unicode bytes (e.g., non-breaking space U+00A0)
+\DeclareUnicodeCharacter{00A0}{ }
 \usepackage[italian]{babel}
 \usepackage[
     outer=0.075\paperwidth,
@@ -18,8 +20,24 @@
 \usepackage{tabularx}
 \usepackage{color}
 \usepackage{soul}
+\usepackage{listings}
+\usepackage{xcolor} % Required if you want to add colors
 \definecolor{lightyellow}{rgb}{1, 1, 0.8}
 \sethlcolor{yellow}
+
+\lstset{
+    captionpos=b,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{green!70!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    showstringspaces=false,
+    extendedchars=true,
+    literate={À}{{\`A}}1 {ÿ}{{\"y}}1
+}
 
 \title{
 \Large\textbf{Progettazione di una Base di Dati} \\
@@ -28,99 +46,17 @@
 }
 
 \begin{document}
+\author{Max Fachin:\\ 
+Panizza Jacopo: \\ 
+Weijie Liu: 166854@spes.uniud.it\\ 
+Giovanni}
 
-% \maketitle
+\maketitle
 
+\newpage
 
-\section{Aggiunte ai Requisiti}
-
-Per la natura del dominio, è stata introdotta l'entità \texttt{Studente}, che identifica un generico studente il quale non può ricoprire contemporaneamente il ruolo di docente.
-
-Uno studente viene registrato per memorizzare e gestire le iscrizioni ai corsi di laurea ai quali è iscritto. Ogni studente deve essere iscritto ad almeno un corso di laurea, ma è ammesso che uno studente sia iscritto a più corsi di laurea contemporaneamente (es. doppia laurea).
-
-Dello studente si vuole tenere traccia dei corsi di laurea ai quali si è iscritto, del suo codice fiscale, della matricola (numero intero), dell'e-mail, del suo nome e cognome.
-
-Lo studente è registrato dipendentemente ai corsi di laurea a cui è iscritto. Ciò significa che è presente un vincolo di dipendenza esistenziale tra lo studente e i corsi di laurea per i quali è iscritto: le informazioni memorizzate dello studente (matricola, nome, ...) devono continuare a persistere solamente se esiste ancora un corso di laurea per il quale è iscritto.
-
-
-
-\section{Progettazione Concettuale}
-
-\subsection{Analisi dei Requisiti}
-
-
-\subsubsection{Glossario dei Termini}
-
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.4}
-\begin{tabularx}{\textwidth}{l X X X}
-\toprule
-\textbf{Termine} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{Riferimenti} \\
-\midrule
-Studente & Studente iscritto a uno o più corsi di laurea. & & Corso di Laurea \\
-\addlinespace
-Corso di Laurea & Percorso formativo offerto da una struttura universitaria composto da vari corsi. & & Responsabile, Edificio, Corso \\
-\addlinespace
-Corso & Corso offerto da un'università all'interno di un singolo corso di laurea. & & Docente, Lezione, Corso di Laurea \\
-\addlinespace
-Docente & Professore di uno o più corsi. & & Corso \\
-\addlinespace
-Responsabile & Ruolo di docente che presiede il consiglio di un corso di laurea & Presidente del consiglio di corso di laurea & Corso di Laurea, Docente \\
-\addlinespace
-Edificio & Struttura fisica contenente le aule dove si tengono le lezioni dei vari corsi utilizzata da un singolo corso di laurea. & & Aula, Corso di Laurea \\
-\addlinespace
-Aula & Ambiente in cui si svolgono le lezioni. & & Lezione, Edificio \\
-\addlinespace
-Lezione & Attività/evento didattico programmato (corso, aula, giorno, fascia oraria). & & Aula, Corso \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-
-% \subsubsection{Chiarimenti ai Requisiti}
-
-% Uno studente non può essere anche un docente e viceversa: un docente non può essere anche uno studente.
-
-% Un responsabile ha la facoltà di insegnare come un normale docente.
-
-% Il docente non necessariamente deve insegnare.
-
-% Il responsabile di un corso di laurea deve insegnare almeno un corso appartenente a tale corso di laurea. In particolare, se un responsabile è tale per più corsi di laurea, deve insegnare almeno un corso per ciascuno di essi, per esempio se un docente è responsabile del corso di laurea di informatica e matematica allora deve insegnare in almeno un corso che appartenga sia alla laurea di matematica sia a quella di informatica.
-
-% Il numero totale di iscritti a un corso corrisponde al numero di iscritti al corso di laurea cui appartiene.
-
-% Il docente può insegnare a più corsi anche di corsi appartenenti a corsi di laurea differenti.
-
-% L'indirizzo di un edificio segue la sintassi standard: \texttt{<tipo\_via> <nome\_via>, <civico> [, piano <livello>]}
-
-% La fascia oraria delle lezioni viene espressa in formato testuale: prima, seconda, terza, ... 
-% Sia $ T = \{08{:}00, 10{:}00, 13{:}00, 15{:}00\}$ l'insieme degli orari di inizio delle lezioni.
-% Sia inoltre $\Delta = 2 \text{ ore}$ la durata di una lezione.
-% Le possibili fasce orarie sono quindi definite come
-% $$
-% \text{fascie orarie} =\{[t,\, t+\Delta] \mid t \in T\}.
-% $$
-% Dove l'intervallo \{8:00, 10:00\} rappresenta la prima fascia oraria, l'intervallo \{10:00, 12:00\} rappresenta la seconda fascia oraria e così via.
-
-% Il numero di aule disponibili si intende il numero totale di aule che presenta un edificio utilizzabili per svolgere le lezioni.
-
-% Del docente, e quindi anche responsabile, si vuole memorizzare la sua email, la quale lo identifica univocamente, il numero di telefono del ufficio nel quale lavora, il codice fiscale, nome e cognome. Si assume che ogni stanza abbia un singolo telefono e ci possono essere più docenti in una singolo ufficio.
-
-% Non ci possono essere più edifici con lo stesso numero di telefono o stesso indirizzo.
-
-% Ogni corso di laurea deve possedere almeno un edificio di riferimento al fine di assicurare che a ogni corso di laurea presenti delle aule per svolgere le sue lezioni da calendario.
-
-% La base di dati è progettata per rappresentare il calendario settimanale delle lezioni relative a uno specifico periodo didattico, però si da la facoltà di memorizzare docenti, edifici, aule e corsi per i quali verranno usati anche in futuro e non necessariamente in tale periodo didattico.
-
-% Per quanto riguarda i corsi di laurea, essi vengono memorizzati esclusivamente se siano attualmente disponibili, per esempio non vengono salvati corsi di laurea per i quali venivano offerti in passato e che attualmente non vengono più offerti.
-
-% Ogni edificio è associato a un unico corso di laurea. Un edificio può non essere utilizzato per lo svolgimento di lezioni, ma deve comunque essere assegnato a uno specifico corso di laurea.
-
-% Un corso può non essere associato ad alcun docente nel caso in cui non venga erogato nel periodo didattico considerato; in caso contrario, deve essere associato a un docente.
-
-
-\subsubsection{Strutturazione dei Requisiti in Gruppi di Frasi Omogenee}
+\section{Analisi dei Requisiti}
+\subsection{Strutturazione dei Requisiti in Gruppi di Frasi Omogenee}
 
 
 \paragraph{Frasi di carattere generale}
@@ -229,8 +165,78 @@ Di ogni aula vogliamo conoscere il nome, il piano, l'edificio in cui si trova e 
 
 Non possono esservi aule con lo stesso nome in uno stesso edificio; possono, invece, esservi aule con lo stesso nome in edifici diversi.
 
+\subsection{Glossario dei Termini}
 
-\subsubsection{Operazioni}
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{l X X X}
+\toprule
+\textbf{Termine} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{Riferimenti} \\
+\midrule
+Studente & Studente iscritto a uno o più corsi di laurea. & & Corso di Laurea \\
+\addlinespace
+Corso di Laurea & Percorso formativo offerto da una struttura universitaria composto da vari corsi. & & Responsabile, Edificio, Corso \\
+\addlinespace
+Corso & Corso offerto da un'università all'interno di un singolo corso di laurea. & & Docente, Lezione, Corso di Laurea \\
+\addlinespace
+Docente & Professore di uno o più corsi. & & Corso \\
+\addlinespace
+Responsabile & Ruolo di docente che presiede il consiglio di un corso di laurea & Presidente del consiglio di corso di laurea & Corso di Laurea, Docente \\
+\addlinespace
+Edificio & Struttura fisica contenente le aule dove si tengono le lezioni dei vari corsi utilizzata da un singolo corso di laurea. & & Aula, Corso di Laurea \\
+\addlinespace
+Aula & Ambiente in cui si svolgono le lezioni. & & Lezione, Edificio \\
+\addlinespace
+Lezione & Attività/evento didattico programmato (corso, aula, giorno, fascia oraria). & & Aula, Corso \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+% \subsubsection{Chiarimenti ai Requisiti}
+
+% Uno studente non può essere anche un docente e viceversa: un docente non può essere anche uno studente.
+
+% Un responsabile ha la facoltà di insegnare come un normale docente.
+
+% Il docente non necessariamente deve insegnare.
+
+% Il responsabile di un corso di laurea deve insegnare almeno un corso appartenente a tale corso di laurea. In particolare, se un responsabile è tale per più corsi di laurea, deve insegnare almeno un corso per ciascuno di essi, per esempio se un docente è responsabile del corso di laurea di informatica e matematica allora deve insegnare in almeno un corso che appartenga sia alla laurea di matematica sia a quella di informatica.
+
+% Il numero totale di iscritti a un corso corrisponde al numero di iscritti al corso di laurea cui appartiene.
+
+% Il docente può insegnare a più corsi anche di corsi appartenenti a corsi di laurea differenti.
+
+% L'indirizzo di un edificio segue la sintassi standard: \texttt{<tipo\_via> <nome\_via>, <civico> [, piano <livello>]}
+
+% La fascia oraria delle lezioni viene espressa in formato testuale: prima, seconda, terza, ... 
+% Sia $ T = \{08{:}00, 10{:}00, 13{:}00, 15{:}00\}$ l'insieme degli orari di inizio delle lezioni.
+% Sia inoltre $\Delta = 2 \text{ ore}$ la durata di una lezione.
+% Le possibili fasce orarie sono quindi definite come
+% $$
+% \text{fascie orarie} =\{[t,\, t+\Delta] \mid t \in T\}.
+% $$
+% Dove l'intervallo \{8:00, 10:00\} rappresenta la prima fascia oraria, l'intervallo \{10:00, 12:00\} rappresenta la seconda fascia oraria e così via.
+
+% Il numero di aule disponibili si intende il numero totale di aule che presenta un edificio utilizzabili per svolgere le lezioni.
+
+% Del docente, e quindi anche responsabile, si vuole memorizzare la sua email, la quale lo identifica univocamente, il numero di telefono del ufficio nel quale lavora, il codice fiscale, nome e cognome. Si assume che ogni stanza abbia un singolo telefono e ci possono essere più docenti in una singolo ufficio.
+
+% Non ci possono essere più edifici con lo stesso numero di telefono o stesso indirizzo.
+
+% Ogni corso di laurea deve possedere almeno un edificio di riferimento al fine di assicurare che a ogni corso di laurea presenti delle aule per svolgere le sue lezioni da calendario.
+
+% La base di dati è progettata per rappresentare il calendario settimanale delle lezioni relative a uno specifico periodo didattico, però si da la facoltà di memorizzare docenti, edifici, aule e corsi per i quali verranno usati anche in futuro e non necessariamente in tale periodo didattico.
+
+% Per quanto riguarda i corsi di laurea, essi vengono memorizzati esclusivamente se siano attualmente disponibili, per esempio non vengono salvati corsi di laurea per i quali venivano offerti in passato e che attualmente non vengono più offerti.
+
+% Ogni edificio è associato a un unico corso di laurea. Un edificio può non essere utilizzato per lo svolgimento di lezioni, ma deve comunque essere assegnato a uno specifico corso di laurea.
+
+% Un corso può non essere associato ad alcun docente nel caso in cui non venga erogato nel periodo didattico considerato; in caso contrario, deve essere associato a un docente.
+
+\subsection{Operazioni}
+
 \label{sec:operations}
 
 \begin{enumerate}[label=\textbf{Operazione \arabic*}:, ref=\textbf{Operazione \arabic*}, leftmargin=*]
@@ -258,7 +264,7 @@ Non possono esservi aule con lo stesso nome in uno stesso edificio; possono, inv
     \item Individuare le coppie di corsi le cui lezioni si svolgono nelle stesse aule.
     \label{op:find_course_in_same_rooms}
     
-    \item Inserimento di un nuovo edifico.
+    \item Inserimento di un nuovo edificio.
     \label{op:create_building}
     
     \item Inserimento di un nuovo corso di laurea.
@@ -272,11 +278,21 @@ Non possono esservi aule con lo stesso nome in uno stesso edificio; possono, inv
 \end{enumerate}
 
 
+\subsection{Requisiti Aggiuntivi}
+Per la natura del dominio, è stata introdotta l'entità \texttt{Studente}, che identifica un generico studente il quale non può ricoprire contemporaneamente il ruolo di docente.
+
+Uno studente viene registrato per memorizzare e gestire le iscrizioni ai corsi di laurea ai quali è iscritto. Ogni studente deve essere iscritto ad almeno un corso di laurea, ma è ammesso che uno studente sia iscritto a più corsi di laurea contemporaneamente (es. doppia laurea).
+
+Dello studente si vuole tenere traccia dei corsi di laurea ai quali si è iscritto, del suo codice fiscale, della matricola (numero intero), dell'e-mail, del suo nome e cognome.
+
+Lo studente è registrato dipendentemente ai corsi di laurea a cui è iscritto. Ciò significa che è presente un vincolo di dipendenza esistenziale tra lo studente e i corsi di laurea per i quali è iscritto: le informazioni memorizzate dello studente (matricola, nome, ...) devono continuare a persistere solamente se esiste ancora un corso di laurea per il quale è iscritto.
+
+\section{Progettazione Concettuale}
 \subsection{Schema E-R}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{img/ER Schema.pdf}
+    \includegraphics[width=0.95\textwidth]{img/ER.png}
     \caption{Schema E-R del sistema per la gestione del calendario delle lezioni}
     \label{fig:er_schema}
 \end{figure}
@@ -349,12 +365,12 @@ Edificio & n\textsuperscript{o} aule disponibili & tipo numerico intero maggiore
 % \end{itemize}
 
 
-\subsubsection{Strategia di Progettazione}
+\subsection{Strategia di Progettazione}
 
 Lo schema E-R è stato realizzato adottando un approccio \emph{mixed}. In particolare, è stato inizialmente seguito un approccio \emph{top-down} per l'individuazione delle principali entità del dominio; successivamente è stato utilizzato un approccio \emph{inside-out} per integrare le entità e le relazioni necessarie alla realizzazione dello schema finale.
 
 
-\subsubsection{Vincoli di Integrità}
+\subsection{Vincoli di Integrità}
 
 Lo schema E-R presenta diversi cicli e relazioni che possono essere fonte di probabile inconsistenze; in tale sezione sono stati analizzati per decidere l'eventuale introduzione di vincoli di integrità.
 
@@ -410,7 +426,7 @@ Tali vincoli vengono esplicitati come vincoli di integrità aggiuntivi.
 \end{enumerate}
 
 
-\subsubsection{Ridondanze}
+\subsection{Ridondanze}
 \label{sec:all_redundancy}
 
 Dallo schema E-R si possono notare le seguenti ridondanze:
@@ -421,7 +437,7 @@ Dallo schema E-R si possono notare le seguenti ridondanze:
 \end{itemize}
 
 
-\subsubsection{Politiche di Cancellazione sulle Entità}
+\subsection{Politiche di Cancellazione sulle Entità}
 \label{sec:entity_deletion_policies}
 
 Al fine di dettagliare i vincoli di partecipazione e di ciclo di vita non esprimibili graficamente nel diagramma E-R, viene di seguito definito il comportamento del sistema in caso di eliminazione di un'istanza per ciascuna entità.
@@ -478,7 +494,7 @@ Dallo schema E-R in Figura~\ref{fig:er_schema} risultano presenti due generalizz
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\linewidth]{img/Removed Generalizations ER Schema.pdf}
+    \includegraphics[width=1\linewidth]{img/er-logico.png}
     \caption{Schema ER privo di generalizzazioni}
     \label{fig:generalization_removed}
 \end{figure}
@@ -575,7 +591,7 @@ Vengono riportate le informazioni relative ai volumi dei dati e alle frequenze d
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth, trim={200pt, 200pt, 200pt, 200pt}]{img/Redundancy ER Schema.pdf}
+    \includegraphics[width=0.7\textwidth]{img/redun-er.png}
     \caption{Sotto-schema E-R per l'analisi delle ridondanze sul attributo \texttt{n\textsuperscript{o} iscritti}}
     \label{fig:er_redundancy_subschema}
 \end{figure}
@@ -926,8 +942,76 @@ Nella Tabella~\ref{tab:attributes_rel_schema} sono riportati i domini associati 
 \label{tab:attributes_rel_schema}
 \end{table}
 
+\newpage
+\section{Implementazione}
+\subsection{Creazione del Database e delle Tabelle}
 
-\section{Implementazione dei vincoli di integrità}
+Il codice SQL seguente illustra la creazione dei domini personalizzati definiti precedentemente e delle tabelle, includendo i vincoli di integrità primari, di unicità e referenziali. Per motivi di sintesi, si riporta un sottoinsieme rappresentativo dello schema logico.
+
+\begin{lstlisting}[language=SQL, title={Creazione di domini}]
+CREATE DOMAIN d_person_id AS CHAR(16) 
+  CONSTRAINT ck_codice_fiscale 
+  CHECK (
+    VALUE ~ '^[A-Z]{6}[0-9]{2}[A-EHLMPR-T][0-9]{2}[A-Z][0-9]{3}[A-Z]$'
+  );
+
+CREATE DOMAIN d_email AS VARCHAR(100) 
+  CONSTRAINT ck_formato_email 
+  CHECK (
+    VALUE ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+  );
+
+CREATE DOMAIN d_person_name AS VARCHAR(50) 
+  CONSTRAINT ck_nome_persona 
+  CHECK (VALUE ~* '^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9\s]+$');
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, title={Creazione di tabelle}]
+CREATE TABLE Corso_di_Laurea (
+  nome VARCHAR(100) CONSTRAINT pk_cdl_nome PRIMARY KEY,
+  n_iscritti INTEGER NOT NULL DEFAULT 0,
+  responsabile d_person_id 
+    CONSTRAINT fk_cdl_responsabile REFERENCES Docente 
+    ON UPDATE CASCADE ON DELETE NO ACTION
+);
+
+CREATE TABLE Lezione (
+  corso VARCHAR(100),
+  corso_di_laurea VARCHAR(100),
+  giorno DATE,
+  fascia_oraria VARCHAR(7),
+  aula VARCHAR(100) NOT NULL,
+  edificio VARCHAR(100) NOT NULL,
+  CONSTRAINT pk_lezione 
+    PRIMARY KEY (corso, corso_di_laurea, giorno, fascia_oraria),
+  CONSTRAINT unq_lezione_giorno_ora_aula_edificio 
+    UNIQUE (giorno, fascia_oraria, aula, edificio),
+  CONSTRAINT fk_lezione_corso 
+    FOREIGN KEY (corso, corso_di_laurea) REFERENCES Corso 
+    ON UPDATE CASCADE ON DELETE NO ACTION,
+  CONSTRAINT fk_lezione_aula 
+    FOREIGN KEY (aula, edificio) REFERENCES Aula 
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+\end{lstlisting}
+
+\subsection{Popolamento della Base di Dati}
+
+Il popolamento della base di dati è stato eseguito manualmente tramite transazioni, per gestire correttamente le dipendenze referenziali. Di seguito un estratto del codice utilizzato.
+
+\begin{lstlisting}[language=SQL, title={Estratto del popolamento del database}]
+START TRANSACTION;
+INSERT INTO Corso_di_Laurea (nome, n_iscritti, responsabile) VALUES 
+('Informatica', 0, 'PZZCRL99P15L219X'),
+('Fisica', 0, 'GLLFRC70E20H501A');
+
+INSERT INTO Corso (nome, corso_di_laurea, docente) VALUES 
+('Basi di Dati', 'Informatica', 'PZZCRL99P15L219X'),
+('Dinamica', 'Fisica', 'GLLFRC70E20H501A');
+COMMIT;
+\end{lstlisting}
+
+\subsection{Implementazione dei Trigger}
 
 Durante l'implementazione della base di dati è stata realizzata soltanto una parte dei vincoli di integrità individuati durante le fasi di progettazione concettuale e logica.
 
@@ -942,32 +1026,200 @@ Inoltre, è stato implementato un trigger per la gestione automatica dell'attrib
 
 I restanti vincoli di integrità non sono stati implementati direttamente all'interno della base di dati.
 
+\subsubsection{Vincolo di Disgiunzione Studente-Docente (\ref{ic:student_teacher})}
+Il seguente trigger implementa il vincolo di disgiunzione e impedisce l'inserimento di uno studente i cui dati identificativi siano già associati a un docente. Un costrutto speculare è stato implementato per l'entità \texttt{Docente}.
 
-\subsection{\ref{ic:building_course}}
+\begin{lstlisting}[language=SQL, title={Trigger per il controllo di disgiunzione Studente-Docente}]
+CREATE FUNCTION check_student_is_not_teacher()
+RETURNS TRIGGER
+LANGUAGE PLPGSQL AS
+$$
+  BEGIN
+    PERFORM *
+    FROM Docente
+    WHERE cf = NEW.cf OR email = NEW.email;
+    
+    IF FOUND THEN
+      RAISE EXCEPTION '[ERROR][STUDENT]: l''email % o codice fiscale % identifica un docente.', NEW.email, NEW.cf;
+      RETURN NULL;
+    END IF;
+    
+    RETURN NEW;
+  END;
+$$;
+
+CREATE TRIGGER trg_student_disjoint_check_ins
+BEFORE INSERT ON Studente
+FOR EACH ROW
+EXECUTE FUNCTION check_student_is_not_teacher();
+\end{lstlisting}
+
+\subsubsection{Gestione Attributo Ridondante}
+Il seguente trigger gestisce dinamicamente la ridondanza relativa al conteggio degli iscritti, aggiornando il valore dell'attributo nell'entità \texttt{Corso di Laurea} ogni volta che si verificano inserimenti, rimozioni o modifiche sulla relazione \texttt{Iscritto}.
+
+\begin{lstlisting}[language=SQL, title={Trigger per l'aggiornamento automatico degli iscritti}]
+CREATE OR REPLACE FUNCTION update_student_count()
+RETURNS TRIGGER
+LANGUAGE PLPGSQL AS
+$$
+  BEGIN
+    IF (TG_OP = 'INSERT') THEN
+      UPDATE Corso_di_Laurea SET n_iscritti = n_iscritti + 1 WHERE nome = NEW.corso_di_laurea;
+
+    ELSIF (TG_OP = 'DELETE') THEN
+      UPDATE Corso_di_Laurea SET n_iscritti = n_iscritti - 1 WHERE nome = OLD.corso_di_laurea;
+
+    ELSIF (TG_OP = 'UPDATE') THEN
+      UPDATE Corso_di_Laurea SET n_iscritti = n_iscritti - 1 WHERE nome = OLD.corso_di_laurea;
+      UPDATE Corso_di_Laurea SET n_iscritti = n_iscritti + 1 WHERE nome = NEW.corso_di_laurea;
+    END IF;
+
+    RETURN NULL;
+  END;
+$$;
+
+CREATE TRIGGER trg_enrollment_count_ins_del
+AFTER INSERT OR DELETE OR UPDATE ON Iscritto
+FOR EACH ROW
+EXECUTE FUNCTION update_student_count();
+\end{lstlisting}
+
+\subsection{Vincoli di Integrità Non Implementati}
+
+\subsubsection{\ref{ic:building_course}}
 
 Tale vincolo richiede che le lezioni di un corso si svolgano esclusivamente in aule appartenenti a edifici associati al corso di laurea a cui il corso appartiene.
 
-L'implementazione del vincolo sarebbe stata realizzata mediante diversi trigger. Un trigger di tipo \texttt{BEFORE INSERT} avrebbe verificato, prima dell'inserimento di una nuova lezione, che l'istanza nella relazione \texttt{Edificio}, relativa all'edificio in cui viene svolta la lezione, identifichi, nel vincolo iter-relazionale tra \texttt{Edificio} e \texttt{Corso di Laurea}, il medesimo corso di laurea del corso della lezione inserita.
+L'implementazione del vincolo sarebbe stata realizzata mediante diversi trigger:
+\begin{itemize}
+    \item Un trigger di tipo \texttt{BEFORE INSERT} avrebbe verificato, prima dell'inserimento di una nuova lezione, che l'istanza nella relazione \texttt{Edificio}, relativa all'edificio in cui viene svolta la lezione, identifichi, nel vincolo inter-relazionale tra \texttt{Edificio} e \texttt{Corso di Laurea}, il medesimo corso di laurea del corso della lezione inserita.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} avrebbe verificato che se fosse stato modificato il corso della lezione, il nuovo corso appartenga allo stesso corso di laurea di quello precedente, mentre se la modifica faccia riferimento all'aula, sarebbe stata verificata che l'istanza dell'edificio, relativa all'edificio in cui verrà svolta la lezione, identifichi, nel vincolo inter-relazionale, il medesimo corso di laurea del corso della lezione.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Edificio} avrebbe evitato eventuali modifiche agli attributi coinvolti nel vincolo inter-referenziale tra l'entità \texttt{Corso di Laurea}, nel caso in cui l'edificio fosse associato a lezioni programmate.
+\end{itemize}
 
-Un trigger di tipo \texttt{BEFORE UPDATE} avrebbe verificato che se fosse stato modicato il corso della lezione, il nuovo corso appartenga allo stesso corso di laurea di quello precedente, mentre se la modifica faccia riferimento all'aula, sarebbe stata verificata che l'istanza del edificio, relativa all'edificio in cui verrà svolta la lezione, identifichi, nel vincolo iter-relazionale, il medesimo corso di laurea del corso della lezione.
-
-Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Edificio} avrebbe evitato eventuali modifiche agli attributi coinvolti nel vincolo inter-referenziale tra l'entità \texttt{Corso di Laurea}, nel caso in cui l'edificio fosse associato a lezioni programmate.
-
-
-\subsection{\ref{ic:responsable_course}}
+\subsubsection{\ref{ic:responsable_course}}
 
 Tale vincolo richiede che il docente responsabile di un corso di laurea insegni almeno un corso appartenente a tale corso di laurea.
 
-L'implementazione del vincolo sarebbe stata realizzata mediante un trigger di tipo \texttt{BEFORE INSERT} applicato alla relazione \texttt{Corso di Laurea}, che avrebbe verificato, prima dell'inserimento di un nuovo corso di laurea, l'esistenza di almeno un istanza nella relazione \texttt{Corso} che appartiene al corso di laurea inserito e tale istanza identifichi un corso insegnato dal docente responsabile assegnato al corso di laurea inserito.
+L'implementazione del vincolo sarebbe stata realizzata mediante i seguenti trigger:
+\begin{itemize}
+    \item Un trigger di tipo \texttt{BEFORE INSERT} applicato alla relazione \texttt{Corso di Laurea}, che avrebbe verificato, prima dell'inserimento di un nuovo corso di laurea, l'esistenza di almeno un'istanza nella relazione \texttt{Corso} che appartiene al corso di laurea inserito e che tale istanza identifichi un corso insegnato dal docente responsabile assegnato.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso di Laurea} che avrebbe verificato che, nel caso venisse modificato il riferimento al responsabile, al termine dell'aggiornamento sarebbe stata garantita l'esistenza di almeno un'istanza di un corso appartenente al corso di laurea aggiornato e insegnato dal nuovo docente responsabile.
+    \item Un trigger di tipo \texttt{BEFORE DELETE} applicato alla relazione \texttt{Corso} che avrebbe impedito la cancellazione di un'istanza qualora essa rappresenti l'unico corso insegnato dal responsabile del corso di laurea associato.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che avrebbe verificato che, al termine di un'eventuale modifica degli attributi relativi al vincolo inter-relazionale tra \texttt{Corso} e \texttt{Docente}, ci sia un'istanza di corso che è insegnato dal responsabile del corso di laurea a cui appartiene.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che avrebbe verificato che, al termine di un'eventuale modifica degli attributi relativi al vincolo inter-relazionale tra \texttt{Corso} e \texttt{Corso di Laurea}, ci sia un'istanza di corso che è insegnato dal responsabile del corso di laurea a cui apparteneva il corso prima dell'aggiornamento.
+\end{itemize}
 
-Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso di Laurea} che avrebbe verificato che nel caso venisse modificato il riferimento al responsabile, al termine dell'aggiornamento, sarebbe stata garantitia l'esistenza di almeno un istanza di un corso appartenente al corso di laurea aggiornato e insegnato dal nuovo docente responsabile.
+\subsection{Implementazione delle Operazioni}
 
-Un trigger di tipo \texttt{BEFORE DELETE} applicato alla relazione \texttt{Corso} che avrebbe impedito la cancellazione di un'istanza qualora essa rappresenti l'unico corso insegnato dal responsabile del corso di laurea associato.
+Di seguito si riporta il codice SQL relativo a un sottoinsieme delle operazioni definite nella Sezione \ref{sec:operations}, comprendente le interrogazioni complesse e le transazioni di manipolazione dei dati.
 
-Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che avrebbe verificato che al termine di un eventuale modifica dei attributi relativi al vincolo iter-relazionale tra \texttt{Corso} e \texttt{Docente}, ci sia un istanza di corso che è insegnato dal responsabile del corso di laurea a cui appartiente.
+\begin{lstlisting}[language=SQL, title={\ref{op:find_teachers_by_responsible}: Individuare i docenti per il responsabile Carla Piazza}]
+SELECT DISTINCT c1.docente
+FROM Corso c1
+JOIN Corso c2 ON c1.docente = c2.docente
+JOIN Corso_di_Laurea l1 ON l1.nome = c1.corso_di_laurea
+JOIN Corso_di_Laurea l2 ON l2.nome = c2.corso_di_laurea
+JOIN Docente Resp1 ON l1.responsabile = Resp1.cf
+JOIN Docente Resp2 ON l2.responsabile = Resp2.cf
+WHERE Resp1.nome ~* 'Carla' AND Resp1.cognome ~* 'Piazza'
+  AND Resp2.nome ~* 'Carla' AND Resp2.cognome ~* 'Piazza'
+  AND c1.nome != c2.nome;
+\end{lstlisting}
 
-Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che avrebbe verificato che al termine di un eventuale modifica dei attributi relativi al vincolo iter-relazionale tra \texttt{Corso} e \texttt{Corso di Laurea}, ci sia un istanza di corso che è insegnato dal responsabile del corso di laurea a cui apparteneva il corso prima del aggiornamento.
+\begin{lstlisting}[language=SQL, title={\ref{op:find_course_max_rooms}: Corso con il maggior numero di aule distinte}]
+SELECT DISTINCT L1.corso, L1.corso_di_laurea
+FROM Lezione L1
+WHERE NOT EXISTS (
+  SELECT *
+  FROM Lezione L2
+  WHERE (
+    SELECT COUNT(DISTINCT (aula, edificio))
+    FROM Lezione
+    WHERE corso = L2.corso AND corso_di_laurea = L2.corso_di_laurea
+  ) > (
+    SELECT COUNT(DISTINCT (aula, edificio))
+    FROM Lezione
+    WHERE corso = L1.corso AND corso_di_laurea = L1.corso_di_laurea
+  )
+);
+\end{lstlisting}
 
+\begin{lstlisting}[language=SQL, title={\ref{op:find_courses_covering_rooms}: Corsi che coprono tutte le aule del corso di Statistica in Tecnologie digitali}]
+SELECT nome, corso_di_laurea
+FROM Corso
+WHERE NOT EXISTS (
+  SELECT *
+  FROM Lezione L
+  WHERE corso ~* 'Statistica' AND corso_di_laurea ~* 'Tecnologie digitali e comunicazione per le industrie creative' AND NOT EXISTS (
+    SELECT *
+    FROM Lezione
+    WHERE corso = Corso.nome AND corso_di_laurea = Corso.corso_di_laurea AND aula = L.aula AND edificio = L.edificio
+  )
+);
+\end{lstlisting}
 
+\begin{lstlisting}[language=SQL, title={\ref{op:find_students_by_teacher}: Studenti partecipanti alle lezioni della docente Carla Piazza}]
+SELECT DISTINCT studente
+FROM Iscritto
+WHERE corso_di_laurea IN (
+  SELECT C.corso_di_laurea
+  FROM Docente D JOIN Corso C ON D.cf = C.docente
+  WHERE D.nome ~* 'Carla' AND D.cognome ~* 'Piazza'
+);
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, title={\ref{op:find_course_in_same_rooms}: Coppie di corsi con le medesime aule}]
+SELECT DISTINCT C1.corso, C1.corso_di_laurea, C2.corso, C2.corso_di_laurea
+FROM Lezione C1, Lezione C2
+WHERE (C1.corso < C2.corso OR (C1.corso = C2.corso AND C1.corso_di_laurea < C2.corso_di_laurea)) AND
+  NOT EXISTS (
+  SELECT aula, edificio
+  FROM Lezione
+  WHERE corso = C1.corso AND corso_di_laurea = C1.corso_di_laurea
+  EXCEPT
+  SELECT aula, edificio
+  FROM Lezione
+  WHERE corso = C2.corso AND corso_di_laurea = C2.corso_di_laurea
+) AND NOT EXISTS (
+  SELECT aula, edificio
+  FROM Lezione
+  WHERE corso = C2.corso AND corso_di_laurea = C2.corso_di_laurea
+  EXCEPT
+  SELECT aula, edificio
+  FROM Lezione
+  WHERE corso = C1.corso AND corso_di_laurea = C1.corso_di_laurea
+);
+\end{lstlisting}
+\newpage
+\begin{lstlisting}[language=SQL, title={\ref{op:create_building}: Inserimento dell'edificio Biblioteca A e dell'Aula A1}]
+START TRANSACTION;
+INSERT INTO Edificio VALUES ('Biblioteca A', 'Via Claudio 21, 80125', '+390817681111', NULL);
+INSERT INTO Aula VALUES ('Aula A1', 'Biblioteca A', 0, 150);
+COMMIT;
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, title={\ref{op:create_degree}: Inserimento del corso di laurea in Ingegneria Elettronica e del corso di Analisi}]
+START TRANSACTION;
+INSERT INTO Corso_di_Laurea VALUES ('Ingegneria Elettronica', 0, 'GLIAND88S04L219R'); 
+INSERT INTO Corso VALUES ('Analisi', 'Ingegneria Elettronica', 'GLIAND88S04L219R');
+COMMIT;
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, title={\ref{op:remove_room}: Cancellazione dell'Aula A1 nell'edificio Biblioteca A}]
+START TRANSACTION;
+DELETE FROM Lezione WHERE aula = 'Aula A1' AND edificio = 'Biblioteca A';
+DELETE FROM Aula WHERE nome = 'Aula A1' AND edificio = 'Biblioteca A';
+COMMIT;
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, title={\ref{op:change_room_lesson}: Riassegnazione della lezione di Basi di Dati in Aula Magna}]
+UPDATE Lezione
+SET aula = 'Aula Magna', edificio = 'Edificio A'
+WHERE corso = 'Basi di Dati' 
+AND corso_di_laurea = 'Ingegneria Informatica' 
+AND giorno = '2024-05-20' 
+AND fascia_oraria = 'prima';
+\end{lstlisting}
 
 \end{document}

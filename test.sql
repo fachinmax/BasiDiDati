@@ -231,7 +231,7 @@ $$
 $$;
 
 CREATE TRIGGER trg_enrollment_count_ins_del
-AFTER INSERT OR DELETE ON Iscritto
+AFTER INSERT OR DELETE OR UPDATE ON Iscritto
 FOR EACH ROW
 EXECUTE FUNCTION update_student_count();
 
