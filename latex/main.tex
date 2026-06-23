@@ -1115,13 +1115,14 @@ L'implementazione del vincolo sarebbe stata realizzata mediante i seguenti trigg
 Di seguito si riporta il codice SQL relativo a un sottoinsieme delle operazioni definite nella Sezione \ref{sec:operations}, comprendente le interrogazioni complesse e le transazioni di manipolazione dei dati.
 
 \begin{lstlisting}[language=SQL, title={\ref{op:find_teachers_by_responsible}: Individuare i docenti per il responsabile Carla Piazza}]
-SELECT DISTINCT c1.docente
+SELECT DISTINCT D.cf, D.nome, D.cognome
 FROM Corso c1
 JOIN Corso c2 ON c1.docente = c2.docente
 JOIN Corso_di_Laurea l1 ON l1.nome = c1.corso_di_laurea
 JOIN Corso_di_Laurea l2 ON l2.nome = c2.corso_di_laurea
 JOIN Docente Resp1 ON l1.responsabile = Resp1.cf
 JOIN Docente Resp2 ON l2.responsabile = Resp2.cf
+JOIN Docente D ON c1.docente = D.cf
 WHERE Resp1.nome ~* 'Carla' AND Resp1.cognome ~* 'Piazza'
   AND Resp2.nome ~* 'Carla' AND Resp2.cognome ~* 'Piazza'
   AND c1.nome != c2.nome;
@@ -1160,12 +1161,15 @@ WHERE NOT EXISTS (
 \end{lstlisting}
 
 \begin{lstlisting}[language=SQL, title={\ref{op:find_students_by_teacher}: Studenti partecipanti alle lezioni della docente Carla Piazza}]
-SELECT DISTINCT studente
-FROM Iscritto
-WHERE corso_di_laurea IN (
-  SELECT C.corso_di_laurea
-  FROM Docente D JOIN Corso C ON D.cf = C.docente
-  WHERE D.nome ~* 'Carla' AND D.cognome ~* 'Piazza'
+SELECT DISTINCT S.nome, S.cognome
+FROM Studente S
+JOIN Iscritto I ON S.cf = I.studente
+WHERE EXISTS (
+  SELECT *
+  FROM Docente D 
+  JOIN Corso C ON D.cf = C.docente
+  WHERE D.nome ~* 'Carla' AND D.cognome ~* 'Piazza' 
+    AND C.corso_di_laurea = I.corso_di_laurea
 );
 \end{lstlisting}
 
