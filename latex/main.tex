@@ -21,7 +21,9 @@
 \usepackage{color}
 \usepackage{soul}
 \usepackage{listings}
-\usepackage{xcolor} % Required if you want to add colors
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
 \definecolor{lightyellow}{rgb}{1, 1, 0.8}
 \sethlcolor{yellow}
 
@@ -43,6 +45,7 @@
 
 \title{
     \normalfont \normalsize 
+
     \textsc{Università degli studi di Udine} \\ [25pt]
     \horrule{0.5pt} \\[0.5cm]
     \huge Progettazione di una Base di Dati \\
@@ -297,7 +300,7 @@ Lo studente è registrato dipendentemente dai corsi di laurea a cui è iscritto.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{img/ER.png}
+    \includegraphics[width=0.95\textwidth]{img/er.png}
     \caption{Schema E-R del sistema per la gestione del calendario delle lezioni}
     \label{fig:er_schema}
 \end{figure}
