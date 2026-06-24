@@ -39,10 +39,15 @@
     literate={À}{{\`A}}1 {ÿ}{{\"y}}1
 }
 
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+
 \title{
-\Large\textbf{Progettazione di una Base di Dati} \\
-\vspace{0.4cm}
-\large Gestione del Calendario delle Lezioni Universitarie
+    \normalfont \normalsize 
+    \textsc{Università degli studi di Udine} \\ [25pt]
+    \horrule{0.5pt} \\[0.5cm]
+    \huge Progettazione di una Base di Dati \\
+    \large Gestione del Calendario delle Lezioni Universitarie
+    \horrule{0.5pt} \\[0.5cm]
 }
 
 \begin{document}
@@ -52,7 +57,7 @@ Weijie Liu: 166854@spes.uniud.it\\
 Giovanni Urban: 167774@spes.uniud.it}
 
 \maketitle
-
+\tableofcontents
 \newpage
 
 \section{Analisi dei Requisiti}
@@ -946,8 +951,7 @@ Nella Tabella~\ref{tab:attributes_rel_schema} sono riportati i domini associati 
 \section{Implementazione}
 \subsection{Creazione del Database e delle Tabelle}
 
-Il codice SQL seguente illustra la creazione dei domini personalizzati definiti precedentemente e delle tabelle, includendo i vincoli di integrità primari, di unicità e referenziali. Per motivi di sintesi, si riporta un sottoinsieme rappresentativo dello schema logico.
-
+Il codice SQL seguente illustra la creazione dei domini personalizzati definiti precedentemente e delle tabelle, includendo i vincoli di integrità primari, di unicità e referenziali. Per motivi di sintesi, si riporta un sottoinsieme rappresentativo dello schema logico. L'intero script SQL per la creazione del database è consultabile nel file \texttt{sql/01\_creation.sql}.
 \begin{lstlisting}[language=SQL, title={Creazione di domini}]
 CREATE DOMAIN d_person_id AS CHAR(16) 
   CONSTRAINT ck_codice_fiscale 
@@ -1011,6 +1015,8 @@ INSERT INTO Corso (nome, corso_di_laurea, docente) VALUES
 COMMIT;
 \end{lstlisting}
 
+Si faccia riferimento al file \texttt{sql/03\_fill.sql} per il codice completo.
+
 \subsection{Implementazione dei Trigger}
 
 Durante l'implementazione della base di dati è stata realizzata soltanto una parte dei vincoli di integrità individuati durante le fasi di progettazione concettuale e logica.
@@ -1053,6 +1059,8 @@ BEFORE INSERT ON Studente
 FOR EACH ROW
 EXECUTE FUNCTION check_student_is_not_teacher();
 \end{lstlisting}
+
+L'implementazione completa del Vincolo 4 è disponibile nel file \texttt{sql/02\_triggers.sql}
 
 \subsubsection{Gestione Attributo Ridondante}
 Il seguente trigger gestisce dinamicamente la ridondanza relativa al conteggio degli iscritti, aggiornando il valore dell'attributo nell'entità \texttt{Corso di Laurea} ogni volta che si verificano inserimenti, rimozioni o modifiche sulla relazione \texttt{Iscritto}.

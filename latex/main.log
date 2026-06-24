@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.23)  23 JUN 2026 17:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.23)  24 JUN 2026 14:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -328,22 +328,22 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Info: Redefining \it@ocap on input line 48.
-LaTeX Info: Redefining \it@ccap on input line 48.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Info: Redefining \it@ocap on input line 53.
+LaTeX Info: Redefining \it@ccap on input line 53.
 
 
 File italian.ldf warning: 
@@ -351,7 +351,7 @@ italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting
-italian.ldf    on input line 48.
+italian.ldf    on input line 53.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -410,106 +410,110 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count323
-
+ (main.toc
 
 [1
 
-{C:/Users/K/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+{C:/Users/K/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}])
+\tf@toc=\write3
+\openout3 = `main.toc'.
+
+
 
 [2]
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 155.
+
+[3]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 160.
  (C:\Users\K\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 155.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 160.
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--193
+Underfull \hbox (badness 10000) in paragraph at lines 198--198
 []|\OT1/cmr/m/n/10.95 Responsabile, Edi-fi-cio,
  []
 
 
-Underfull \hbox (badness 6141) in paragraph at lines 193--193
+Underfull \hbox (badness 6141) in paragraph at lines 198--198
 []|\OT1/cmr/m/n/10.95 Attivit^^Ra/evento di-dat-ti-co
  []
 
 
 
-[3]
-
 [4]
-<img/ER.png, id=20, 1395.2125pt x 624.3325pt>
+
+[5]
+<img/ER.png, id=25, 1395.2125pt x 624.3325pt>
 File: img/ER.png Graphic file (type png)
 <use img/ER.png>
-Package pdftex.def Info: img/ER.png  used on input line 295.
+Package pdftex.def Info: img/ER.png  used on input line 300.
 (pdftex.def)             Requested size: 482.48952pt x 215.89984pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 331--331
+Underfull \hbox (badness 10000) in paragraph at lines 336--336
 []|\OT1/cmr/m/n/10.95 tipo strin-ga ta-le che ti-po $\OMS/cmsy/m/n/10.95 2
  []
 
 
 
-[5 <./img/ER.png>]
+[6 <./img/ER.png>]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 381.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 386.
 
 
-[6]
-Overfull \hbox (0.25162pt too wide) in paragraph at lines 400--401
+[7]
+Overfull \hbox (0.25162pt too wide) in paragraph at lines 405--406
  \OT1/cmr/bx/n/10.95 Ci-clo \OT1/cmtt/m/n/10.95 Docente\OT1/cmr/bx/n/10.95 -\OT1/cmtt/m/n/10.95 Corso\OT1/cmr/bx/n/10.95 -\OT1/cmtt/m/n/10.95 Lezione\OT1/cmr/bx/n/10.95 -\OT1/cmtt/m/n/10.95 Aula\OT1/cmr/bx/n/10.95 -\OT1/cmtt/m/n/10.95 Edificio\OT1/cmr/bx/n/10.95 -\OT1/cmtt/m/n/10.95 Corso di Laurea\OT1/cmr/bx/n/10.95 -\OT1/cmtt/m/n/10.95 Responsabile[] \OT1/cmr/m/n/10.95 Ol-tre al-le con-si-de-ra-zio-
  []
 
 
-Overfull \hbox (4.4799pt too wide) in paragraph at lines 410--411
+Overfull \hbox (4.4799pt too wide) in paragraph at lines 415--416
 \OT1/cmr/m/n/10.95 ra-zio-ni svol-te sul ci-clo Ci-clo \OT1/cmtt/m/n/10.95 Docente\OT1/cmr/m/n/10.95 -\OT1/cmtt/m/n/10.95 Corso\OT1/cmr/m/n/10.95 -\OT1/cmtt/m/n/10.95 Lezione\OT1/cmr/m/n/10.95 -\OT1/cmtt/m/n/10.95 Aula\OT1/cmr/m/n/10.95 -\OT1/cmtt/m/n/10.95 Edificio\OT1/cmr/m/n/10.95 -\OT1/cmtt/m/n/10.95 Corso di Laurea\OT1/cmr/m/n/10.95 -\OT1/cmtt/m/n/10.95 Responsabile[]\OT1/cmr/m/n/10.95 , que-
  []
 
 
 
-[7]
-<img/er-logic.png, id=38, 1395.2125pt x 582.175pt>
+[8]
+<img/er-logic.png, id=43, 1395.2125pt x 582.175pt>
 File: img/er-logic.png Graphic file (type png)
 <use img/er-logic.png>
-Package pdftex.def Info: img/er-logic.png  used on input line 497.
+Package pdftex.def Info: img/er-logic.png  used on input line 502.
 (pdftex.def)             Requested size: 507.88535pt x 211.91914pt.
 
 
-[8]
+[9]
 
-[9 <./img/er-logic.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 590--591
+[10 <./img/er-logic.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 595--596
 
  []
 
-<img/redun-er.png, id=46, 544.0325pt x 222.8325pt>
+<img/redun-er.png, id=51, 544.0325pt x 222.8325pt>
 File: img/redun-er.png Graphic file (type png)
 <use img/redun-er.png>
-Package pdftex.def Info: img/redun-er.png  used on input line 594.
+Package pdftex.def Info: img/redun-er.png  used on input line 599.
 (pdftex.def)             Requested size: 355.51819pt x 145.62483pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 600--601
+Underfull \hbox (badness 10000) in paragraph at lines 605--606
 
  []
 
 
 
-[10 <./img/redun-er.png>]
-
-[11]
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 809.
-
+[11 <./img/redun-er.png>]
 
 [12]
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 814.
+
 
 [13]
 
-[14] (C:\Users\K\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+[14]
+
+[15] (C:\Users\K\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
-
-[15]
 
 [16]
 
@@ -519,24 +523,26 @@ File: lstlang1.sty 2024/09/23 1.10c listings language file
 
 [19]
 
-[20] (main.aux)
+[20]
+
+[21] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-11-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 9558 strings out of 473650
- 154764 string characters out of 5719862
- 960693 words of memory out of 5000000
- 32538 multiletter control sequences out of 15000+600000
- 566247 words of font info for 65 fonts, out of 8000000 for 9000
+ 9571 strings out of 473650
+ 154956 string characters out of 5719862
+ 960790 words of memory out of 5000000
+ 32547 multiletter control sequences out of 15000+600000
+ 566847 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,14n,79p,595b,1678s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\K\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt1000.pk> <C:\Users\K\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (20 pages, 268634 bytes).
+ <C:\Users\K\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt1000.pk> <C:\Users\K\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on main.pdf (21 pages, 293969 bytes).
 PDF statistics:
- 139 PDF objects out of 1000 (max. 8388607)
+ 152 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

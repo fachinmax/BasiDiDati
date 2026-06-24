@@ -81,7 +81,7 @@ CREATE TABLE Lezione (
 
 -- triggers
 
--- vincolo integrita' 4: un docente non puo' essere anche uno studente e, viceversa, uno studente non puo' essere anche un docente
+-- vincolo integrita' 3: un docente non puo' essere anche uno studente e, viceversa, uno studente non puo' essere anche un docente
 
 CREATE FUNCTION check_student_is_not_teacher()
 RETURNS TRIGGER
@@ -143,7 +143,7 @@ WHEN (OLD.cf IS DISTINCT FROM NEW.cf OR OLD.email IS DISTINCT FROM NEW.email)
 EXECUTE FUNCTION check_teacher_is_not_student();
 
 
--- vincolo integrita' 5: ogni studente deve essere iscritto ad almeno un corso di laurea.
+-- vincolo integrita' 4: ogni studente deve essere iscritto ad almeno un corso di laurea.
 --                       La rimozione di tutte le iscrizioni di uno studente deve comportare la sua rimozione.
 
 CREATE OR REPLACE FUNCTION check_student_enrolled()

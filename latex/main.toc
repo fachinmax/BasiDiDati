@@ -1,0 +1,62 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Analisi dei Requisiti}{3}{}%
+\contentsline {subsection}{\numberline {1.1}Strutturazione dei Requisiti in Gruppi di Frasi Omogenee}{3}{}%
+\contentsline {paragraph}{Frasi di carattere generale}{3}{}%
+\contentsline {paragraph}{Frasi relative agli studenti}{3}{}%
+\contentsline {paragraph}{Frasi relative ai corsi di laurea}{3}{}%
+\contentsline {paragraph}{Frasi relative ai corsi}{3}{}%
+\contentsline {paragraph}{Frasi relative ai docenti}{4}{}%
+\contentsline {paragraph}{Frasi relative ai responsabili}{4}{}%
+\contentsline {paragraph}{Frasi relative agli edifici}{4}{}%
+\contentsline {paragraph}{Frasi relative alle lezioni}{4}{}%
+\contentsline {paragraph}{Frasi relative alle aule}{4}{}%
+\contentsline {subsection}{\numberline {1.2}Glossario dei Termini}{5}{}%
+\contentsline {subsection}{\numberline {1.3}Operazioni}{5}{}%
+\contentsline {subsection}{\numberline {1.4}Requisiti Aggiuntivi}{6}{}%
+\contentsline {section}{\numberline {2}Progettazione Concettuale}{6}{}%
+\contentsline {subsection}{\numberline {2.1}Schema E-R}{6}{}%
+\contentsline {subsection}{\numberline {2.2}Strategia di Progettazione}{7}{}%
+\contentsline {subsection}{\numberline {2.3}Vincoli di Integrità}{7}{}%
+\contentsline {paragraph}{Ciclo \texttt {Corso}-\texttt {Lezione}-\texttt {Aula}-\texttt {Edificio}-\texttt {Corso di Laurea}}{7}{}%
+\contentsline {paragraph}{Ciclo \texttt {Docente}-\texttt {Corso}-\texttt {Corso di Laurea} - \texttt {Responsabile}}{7}{}%
+\contentsline {paragraph}{Ciclo \texttt {Persona}-\texttt {Docente}-\texttt {Responsabile}-\texttt {Corso di Laurea}-\texttt {Studente}}{7}{}%
+\contentsline {paragraph}{Ciclo \texttt {Docente}-\texttt {Corso}-\texttt {Lezione}-\texttt {Aula}-\texttt {Edificio}-\texttt {Corso di Laurea}-\texttt {Responsabile}}{8}{}%
+\contentsline {paragraph}{Ciclo \texttt {Persona}-\texttt {Docente}-\texttt {Corso}-\texttt {Corso di Laurea}-\texttt {Studente}}{8}{}%
+\contentsline {paragraph}{Ciclo \texttt {Persona}-\texttt {Docente}-\texttt {Corso}-\texttt {Lezione}-\texttt {Aula}-\texttt {Edificio}-\texttt {Corso di Laurea}-\texttt {Studente}}{8}{}%
+\contentsline {paragraph}{Vincoli di Integrità Aggiuntivi}{8}{}%
+\contentsline {subsection}{\numberline {2.4}Ridondanze}{8}{}%
+\contentsline {subsection}{\numberline {2.5}Politiche di Cancellazione sulle Entità}{8}{}%
+\contentsline {subsection}{\numberline {2.6}Risultati Progettazione Concettuale}{9}{}%
+\contentsline {section}{\numberline {3}Progettazione Logica}{9}{}%
+\contentsline {subsection}{\numberline {3.1}Ristrutturazione dello Schema E-R}{9}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Rimozione degli Attributi Composti}{9}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Rimozione delle Generalizzazioni}{9}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}Disaccoppiamento/Aggregazione di Entità e Relazioni}{10}{}%
+\contentsline {subsubsection}{\numberline {3.1.4}Analisi delle Ridondanze}{10}{}%
+\contentsline {paragraph}{Analisi delle Performance}{10}{}%
+\contentsline {paragraph}{Sottoschema di riferimento}{11}{}%
+\contentsline {paragraph}{Volumi e operazioni}{11}{}%
+\contentsline {paragraph}{Presenza delle Ridondanze}{11}{}%
+\contentsline {paragraph}{Assenza delle Ridondanze}{12}{}%
+\contentsline {paragraph}{Analisi dei Costi}{12}{}%
+\contentsline {subparagraph}{Presenza di Ridondanza}{12}{}%
+\contentsline {subparagraph}{Assenza di Ridondanza}{12}{}%
+\contentsline {subparagraph}{Costo Totale}{13}{}%
+\contentsline {paragraph}{Conclusioni}{13}{}%
+\contentsline {subsubsection}{\numberline {3.1.5}Scelta degli Identificatori Principali}{13}{}%
+\contentsline {subsection}{\numberline {3.2}Schema Relazionale}{13}{}%
+\contentsline {subsection}{\numberline {3.3}Risultati Progettazione Logica}{14}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}Vincoli di Integrità}{14}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}Regole di Derivazione}{15}{}%
+\contentsline {subsubsection}{\numberline {3.3.3}Domini degli Attributi}{15}{}%
+\contentsline {section}{\numberline {4}Implementazione}{16}{}%
+\contentsline {subsection}{\numberline {4.1}Creazione del Database e delle Tabelle}{16}{}%
+\contentsline {subsection}{\numberline {4.2}Popolamento della Base di Dati}{16}{}%
+\contentsline {subsection}{\numberline {4.3}Implementazione dei Trigger}{17}{}%
+\contentsline {subsubsection}{\numberline {4.3.1}Vincolo di Disgiunzione Studente-Docente (\ref {ic:student_teacher})}{17}{}%
+\contentsline {subsubsection}{\numberline {4.3.2}Gestione Attributo Ridondante}{18}{}%
+\contentsline {subsection}{\numberline {4.4}Vincoli di Integrità Non Implementati}{18}{}%
+\contentsline {subsubsection}{\numberline {4.4.1}\ref {ic:building_course}}{18}{}%
+\contentsline {subsubsection}{\numberline {4.4.2}\ref {ic:responsable_course}}{19}{}%
+\contentsline {subsection}{\numberline {4.5}Implementazione delle Operazioni}{19}{}%
