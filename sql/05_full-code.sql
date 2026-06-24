@@ -81,7 +81,7 @@ CREATE TABLE Lezione (
 
 -- triggers
 
--- vincolo integrita' 4: un docente non puo' essere anche uno studente e, viceversa, uno studente non puo' essere anche un docente
+-- vincolo integrita' 3: un docente non puo' essere anche uno studente e, viceversa, uno studente non puo' essere anche un docente
 
 CREATE FUNCTION check_student_is_not_teacher()
 RETURNS TRIGGER
@@ -143,7 +143,7 @@ WHEN (OLD.cf IS DISTINCT FROM NEW.cf OR OLD.email IS DISTINCT FROM NEW.email)
 EXECUTE FUNCTION check_teacher_is_not_student();
 
 
--- vincolo integrita' 5: ogni studente deve essere iscritto ad almeno un corso di laurea.
+-- vincolo integrita' 4: ogni studente deve essere iscritto ad almeno un corso di laurea.
 --                       La rimozione di tutte le iscrizioni di uno studente deve comportare la sua rimozione.
 
 CREATE OR REPLACE FUNCTION check_student_enrolled()
@@ -231,7 +231,7 @@ $$
 $$;
 
 CREATE TRIGGER trg_enrollment_count_ins_del
-AFTER INSERT OR DELETE ON Iscritto
+AFTER INSERT OR DELETE OR UPDATE ON Iscritto
 FOR EACH ROW
 EXECUTE FUNCTION update_student_count();
 
@@ -439,45 +439,41 @@ INSERT INTO Lezione (corso, corso_di_laurea, giorno, fascia_oraria, aula, edific
 ('Calcolo Scientifico', 'Informatica', '2026-04-16', 'quarta', 'C1', 'Rizzi'),
 ('Basi di Dati', 'Internet of Things, Big Data, Machine Learning', '2026-04-17', 'prima', 'Aula 1', 'Edificio Torre'),
 ('Logica', 'Matematica', '2026-04-17', 'seconda', 'Sala 5', 'Villa Mirafiori');
-
+COMMIT;
 
 -- queries
 
 -- Operazione 4: Individuare i docenti che insegnano in almeno due corsi appartenenti ai corsi di laurea il cui responsabile e' uno specifico docente
 
-SELECT C.docente
-FROM Corso C JOIN Corso_di_Laurea CL ON C.corso_di_laurea = CL.nome JOIN Docente Resp ON CL.responsabile = Resp.cf
-WHERE Resp.nome ~* 'Carla' AND Resp.cognome ~* 'Piazza'
-GROUP BY C.docente
-HAVING COUNT(DISTINCT C.nome) >= 2;
-
--- alternativa
-
-SELECT DISTINCT d.cf
-FROM Docente AS d
-JOIN Corso c1 ON d.cf = c1.docente
-JOIN Corso c2 ON d.cf = c2.docente
+SELECT DISTINCT D.cf, D.nome, D.cognome
+FROM Corso c1
+JOIN Corso c2 ON c1.docente = c2.docente
 JOIN Corso_di_Laurea l1 ON l1.nome = c1.corso_di_laurea
 JOIN Corso_di_Laurea l2 ON l2.nome = c2.corso_di_laurea
-WHERE l1.responsabile = 'PZZCRL99P15L219X'
-  AND l2.responsabile = 'PZZCRL99P15L219X'
+JOIN Docente Resp1 ON l1.responsabile = Resp1.cf
+JOIN Docente Resp2 ON l2.responsabile = Resp2.cf
+JOIN Docente D ON c1.docente = D.cf
+WHERE Resp1.nome ~* 'Carla' AND Resp1.cognome ~* 'Piazza'
+  AND Resp2.nome ~* 'Carla' AND Resp2.cognome ~* 'Piazza'
   AND c1.nome != c2.nome;
 
 
 -- Operazione 5: Trovare il corso le cui lezioni si svolgono nel maggior numero di aule distinte
 
-WITH ConteggioAule AS (
-    SELECT corso, corso_di_laurea, COUNT(DISTINCT (aula, edificio)) AS num_aule
-    FROM Lezione
-    GROUP BY corso, corso_di_laurea
-)
-
-SELECT C1.corso, C1.corso_di_laurea
-FROM ConteggioAule C1
+SELECT DISTINCT L1.corso, L1.corso_di_laurea
+FROM Lezione L1
 WHERE NOT EXISTS (
-    SELECT *
-    FROM ConteggioAule
-    WHERE num_aule > C1.num_aule
+  SELECT *
+  FROM Lezione L2
+  WHERE (
+    SELECT COUNT(DISTINCT (aula, edificio))
+    FROM Lezione
+    WHERE corso = L2.corso AND corso_di_laurea = L2.corso_di_laurea
+  ) > (
+    SELECT COUNT(DISTINCT (aula, edificio))
+    FROM Lezione
+    WHERE corso = L1.corso AND corso_di_laurea = L1.corso_di_laurea
+  )
 );
 
 
@@ -498,12 +494,15 @@ WHERE NOT EXISTS (
 
 -- Operazione 7: Trovare tutti gli studenti che partecipano alle lezioni tenute da uno specifico docente
 
-SELECT DISTINCT studente
-FROM Iscritto
-WHERE corso_di_laurea IN (
-  SELECT C.corso_di_laurea
-  FROM Docente D JOIN Corso C ON D.cf = C.docente
-  WHERE D.nome ~* 'Carla' AND D.cognome ~* 'Piazza'
+SELECT DISTINCT S.nome, S.cognome
+FROM Studente S
+JOIN Iscritto I ON S.cf = I.studente
+WHERE EXISTS (
+  SELECT *
+  FROM Docente D 
+  JOIN Corso C ON D.cf = C.docente
+  WHERE D.nome ~* 'Carla' AND D.cognome ~* 'Piazza' 
+    AND C.corso_di_laurea = I.corso_di_laurea
 );
 
 
