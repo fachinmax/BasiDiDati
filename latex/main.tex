@@ -103,14 +103,14 @@ Un corso di laurea non necessariamente deve avere iscritti: si dà la possibilit
 
 \paragraph{Frasi relative ai corsi}
 
-Di ogni corso (ad esempio, il corso di Basi di Dati), vogliamo memorizzarne il nome, il docente insegnante (ogni corso sia tenuto da un solo docente), il numero di studenti iscritti (tale numero corrisponde al numero di studenti iscritti al corso di laurea cui appartiene) e il corso di laurea cui appartiene.
+Di ogni corso (ad esempio, il corso di Basi di Dati), vogliamo memorizzarne il nome, il docente (ogni corso sia tenuto da un solo docente), il numero di studenti iscritti (tale numero corrisponde al numero di studenti iscritti al corso di laurea cui appartiene) e il corso di laurea cui appartiene.
 
 Poiché il sistema gestisce esclusivamente corsi di laurea validi, ogni corso deve avere un docente assegnato; non è ammesso, pertanto, che un corso sia privo di un docente responsabile dell'insegnamento.
 
 Corsi con lo stesso nome possono appartenere solo a corsi di laurea diversi (ad esempio, vi è un corso di Basi di Dati sia presso il Corso di Laurea Triennale in Informatica sia presso il Corso di Laurea Triennale in TWM; non vi possono essere due corsi distinti di Basi di Dati presso il Corso di Laurea Triennale in Informatica o presso il Corso di Laurea Triennale in TWM).
 
 Considerando che corsi con lo stesso nome possono essere sostenuti in corsi di laurea diversi ma un singolo edificio può sostenere solamente corsi di uno specifico corso di laurea allora 
-corsi di laurea non possono avere corsi in comune (per esempio data una lezione di Basi di Dati, essa può essere svolta dagli studenti di TWM oppure dagli studenti di Informatica ma non da entrambi).
+corsi di laurea non possono avere corsi in comune (per esempio data una lezione di Basi di Dati, essa può essere svolta o dagli studenti di TWM oppure dagli studenti di Informatica ma non da entrambi oppure il corso di laurea di Informatica e TWM non possono avere lo stesso corso di Basi di Dati ma possono avere due corsi di Basi di Dati diversi ma con lo stesso nome).
 
 I corsi possono essere registrati per essere svolti in futuri periodi didattici; pertanto, non è obbligatorio che a ogni corso siano già associate delle lezioni.
 
@@ -130,7 +130,8 @@ Di ogni corso di laurea (ad esempio, la Laurea Triennale in Informatica) vogliam
 
 Essendo il responsabile un ruolo, di esso si vuole memorizzare tutte le informazioni di un docente (la sua e-mail, numero di telefono del suo ufficio, codice fiscale, nome e cognome).
 
-Inoltre il responsabile può assumere tale ruolo per uno o più corsi di laurea, purché insegni almeno un corso per ogni corso di laurea di cui è responsabile. 
+Inoltre il responsabile può assumere tale ruolo per uno o più corsi di laurea, purché insegni almeno un corso appartenente a tale corso di laurea. In particolare, se un docente è responsabile di più corsi di laurea, deve insegnare almeno un corso per ciascuno di essi, per esempio se un docente è responsabile del corso di laurea di informatica e matematica allora deve insegnare in almeno un corso che appartenga sia alla laurea di matematica sia a quella di informatica.
+
 
 \paragraph{Frasi relative agli edifici}
 
@@ -142,7 +143,8 @@ Il numero di aule disponibili identifica il numero di aule totali utilizzabili p
 
 Ogni edificio contiene un insieme di aule identificate univocamente dal nome all'interno dello stesso edificio.
 
-Ciascun edificio può essere associato al massimo a un solo corso di laurea. Inoltre, se un edificio non viene utilizzato per svolgere lezioni, può essere comunque attribuito a un corso di laurea oppure rimanere non assegnato. 
+Ciascun edificio può essere associato al massimo a un solo corso di laurea. Inoltre, se un edificio non viene utilizzato per svolgere lezioni, può essere comunque attribuito a un corso di laurea oppure rimanere non assegnato. Per esempio: se l'edificio ``Marchetti'' non viene utilizzato per le lezioni, il sistema permette sia di assegnarlo al corso di Informatica, sia di lasciarlo privo di associazione.
+
 
 
 \paragraph{Frasi relative alle lezioni}
@@ -291,7 +293,7 @@ Uno studente viene registrato per memorizzare e gestire le iscrizioni ai corsi d
 
 Dello studente si vuole tenere traccia dei corsi di laurea ai quali si è iscritto, del suo codice fiscale, della matricola (numero intero), dell'e-mail, del suo nome e cognome.
 
-Lo studente è registrato dipendentemente dai corsi di laurea a cui è iscritto. Ciò significa che è presente un vincolo di dipendenza esistenziale tra lo studente e i corsi di laurea ai quali è iscritto: le informazioni memorizzate dello studente (matricola, nome, ...) devono continuare a persistere solamente se esiste ancora un corso di laurea per il quale è iscritto.
+Lo studente è registrato dipendentemente dai corsi di laurea a cui è iscritto. Ciò significa che è presente un vincolo di dipendenza esistenziale tra lo studente e i corsi di laurea per i quali è iscritto: le informazioni memorizzate dello studente (matricola, nome, ...) devono continuare a persistere solamente se esiste ancora un corso di laurea per il quale è iscritto.
 
 \section{Progettazione Concettuale}
 \subsection{Schema E-R}
@@ -505,7 +507,7 @@ Dallo schema E-R in Figura~\ref{fig:er_schema} risultano presenti due generalizz
     \label{fig:generalization_removed}
 \end{figure}
 
-Nella generalizzazione tra \texttt{Persona}, \texttt{Docente} e \texttt{Studente}, si è deciso di rimuovere l'entità padre \texttt{Persona}, mantenendo le entità figlie. Tale scelta è giustificata dal fatto che la generalizzazione è totale e disgiunta e non esistono operazioni che coinvolgano direttamente l'entità padre ma solo operazioni che coinvolgono separatamente l'entità \texttt{Docente} e l'entità \texttt{Studente}. Tale scelta comporta l'introduzione del vincolo di integrità 
+Nella generalizzazione tra \texttt{Persona}, \texttt{Docente} e \texttt{Studente}, si è deciso di rimuovere l'entità padre \texttt{Persona}, mantenendo le entità figlie. Tale scelta è giustificata dal fatto che la generalizzazione è totale e disgiunta e non esistono operazioni che coinvolgano direttamente l'entità padre ma solo operazioni che coinvolgono separatamente l'entità \texttt{Docente} e l'entità \texttt{Studente}. Tale scelta comporta l'introduzione del vincolo di integrità
 
 \begin{enumerate}[label=\textbf{Vincolo Integrità \arabic*}:, ref=\textbf{Vincolo Integrità \arabic*}, resume=integrity-constraints, leftmargin=*]
     \item Le entità \texttt{Docente} e \texttt{Studente} sono disgiunte: un individuo può appartenere a una sola delle due entità.
@@ -1117,6 +1119,15 @@ L'implementazione del vincolo sarebbe stata realizzata mediante i seguenti trigg
     \item Un trigger di tipo \texttt{BEFORE DELETE} applicato alla relazione \texttt{Corso} che avrebbe impedito la cancellazione di un'istanza qualora essa rappresenti l'unico corso insegnato dal responsabile del corso di laurea associato.
     \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che avrebbe verificato che, al termine di un'eventuale modifica degli attributi relativi al vincolo inter-relazionale tra \texttt{Corso} e \texttt{Docente}, ci sia un'istanza di corso che è insegnato dal responsabile del corso di laurea a cui appartiene.
     \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che avrebbe verificato che, al termine di un'eventuale modifica degli attributi relativi al vincolo inter-relazionale tra \texttt{Corso} e \texttt{Corso di Laurea}, ci sia un'istanza di corso che è insegnato dal responsabile del corso di laurea a cui apparteneva il corso prima dell'aggiornamento.
+\end{itemize}
+
+\subsubsection{Elenco vincoli di integrità non implementati}
+\begin{itemize}
+    \item Quando viene inserita o modificata una lezione, controllare che al corso a lei assegnato sia associato un docente
+    \item Quando si cancella un docente controllare non abbia lezioni
+    \item Quando si crea un corso di Laurea è necessario assegnare/creare nuovo edificio
+    \item Quando si crea un edificio, va assegnata/creata aula
+    \item Quando si cancella edificio bisogna controllare che non sia l'ultimo edificio assegnato al suo corso di Laurea
 \end{itemize}
 
 \subsection{Implementazione delle Operazioni}
