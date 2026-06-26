@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1782305634.12603 "c:/Users/K/Desktop/B/3/BasiDiDati/latex/main.tex" "main.pdf" "main" 1782305635.19781 0
+["pdflatex"] 1782466736.33222 "c:/Users/K/Desktop/B/3/BasiDiDati/latex/main.tex" "main.pdf" "main" 1782466737.37651 0
   "C:/Users/K/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1782136186 82218 41823082ca19362b85ad3114d7b678a5 ""
   "C:/Users/K/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1095.pk" 1756201911 12668 9fb22f611a2eb4d2a8913575834869e7 ""
   "C:/Users/K/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tctt1000.pk" 1782139104 9492 09dc942fe97b60d26091d22bb3b5c2b2 ""
@@ -117,14 +117,14 @@
   "C:/Users/K/AppData/Local/Programs/MiKTeX/tex/latex/tools/tabularx.sty" 1730400552 7243 e5dac1240636811edb77568b81818372 ""
   "C:/Users/K/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/K/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/K/Desktop/B/3/BasiDiDati/latex/main.tex" 1782305633 65168 96b1f92e33e645e5ca8f9b0d5f29095c ""
+  "c:/Users/K/Desktop/B/3/BasiDiDati/latex/main.tex" 1782466732 65779 b501739d7e922774d06bfc99bfef9683 ""
   "img/er-logic.png" 1782225945 125271 279eb83e08032e2c8040ed41739a4fd0 ""
   "img/er.png" 1782225945 136821 1c54d7a9299f82725813f00c11dc1db6 ""
   "img/redun-er.png" 1782225945 28033 93559dc2c4709a916fe3a79e8d6451e1 ""
-  "main.aux" 1782305635 13695 2f809e04f4f3ddae63c1c4a1ebf17f0d "pdflatex"
-  "main.out" 1782305635 7017 b7f5e10c49d461c53e5ca001f7cb152a "pdflatex"
-  "main.tex" 1782305633 65168 96b1f92e33e645e5ca8f9b0d5f29095c ""
-  "main.toc" 1782305635 5725 43193d9e3d075fd654caae09152a7dd1 "pdflatex"
+  "main.aux" 1782466737 13858 85e63a402d662017ff962cf463119c82 "pdflatex"
+  "main.out" 1782466737 7323 3d08a6d8586dd755ed36c8ebb72e0cef "pdflatex"
+  "main.tex" 1782466732 65779 b501739d7e922774d06bfc99bfef9683 ""
+  "main.toc" 1782466737 5847 21a7bcaf7dd0d8381515b0f4b3756e4c "pdflatex"
   (generated)
   "main.aux"
   "main.log"

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.23)  24 JUN 2026 14:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.23)  26 JUN 2026 11:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -540,7 +540,7 @@ Underfull \hbox (badness 6141) in paragraph at lines 201--201
 [4]
 
 [5]
-<img/er.png, id=227, 1395.2125pt x 624.3325pt>
+<img/er.png, id=232, 1395.2125pt x 624.3325pt>
 File: img/er.png Graphic file (type png)
 <use img/er.png>
 Package pdftex.def Info: img/er.png  used on input line 303.
@@ -570,7 +570,7 @@ Overfull \hbox (4.4799pt too wide) in paragraph at lines 418--419
 
 
 [8]
-<img/er-logic.png, id=278, 1395.2125pt x 582.175pt>
+<img/er-logic.png, id=283, 1395.2125pt x 582.175pt>
 File: img/er-logic.png Graphic file (type png)
 <use img/er-logic.png>
 Package pdftex.def Info: img/er-logic.png  used on input line 505.
@@ -584,7 +584,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 598--599
 
  []
 
-<img/redun-er.png, id=304, 544.0325pt x 222.8325pt>
+<img/redun-er.png, id=309, 544.0325pt x 222.8325pt>
 File: img/redun-er.png Graphic file (type png)
 <use img/redun-er.png>
 Package pdftex.def Info: img/redun-er.png  used on input line 602.
@@ -621,26 +621,28 @@ File: lstlang1.sty 2024/09/23 1.10c listings language file
 
 [20]
 
-[21] (main.aux)
+[21]
+
+[22] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-11-02>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B7F5E10C49D461C53E5CA001F7CB152A;7017.
+(rerunfilecheck)             Checksum: 3D08A6D8586DD755ED36C8EBB72E0CEF;7323.
  ) 
 Here is how much of TeX's memory you used:
- 15955 strings out of 473650
- 252860 string characters out of 5719862
- 1057230 words of memory out of 5000000
- 38558 multiletter control sequences out of 15000+600000
+ 15958 strings out of 473650
+ 252907 string characters out of 5719862
+ 1083230 words of memory out of 5000000
+ 38559 multiletter control sequences out of 15000+600000
  566847 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,14n,79p,595b,2029s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\K\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt1000.pk> <C:\Users\K\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/K/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (21 pages, 364861 bytes).
+Output written on main.pdf (22 pages, 367113 bytes).
 PDF statistics:
- 749 PDF objects out of 1000 (max. 8388607)
- 307 named destinations out of 1000 (max. 500000)
- 288 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 758 PDF objects out of 1000 (max. 8388607)
+ 309 named destinations out of 1000 (max. 500000)
+ 296 words of extra memory for PDF output out of 10000 (max. 10000000)
 
