@@ -10,7 +10,7 @@
 \contentsline {paragraph}{Frasi relative ai responsabili}{4}{section*.7}%
 \contentsline {paragraph}{Frasi relative agli edifici}{4}{section*.8}%
 \contentsline {paragraph}{Frasi relative alle lezioni}{4}{section*.9}%
-\contentsline {paragraph}{Frasi relative alle aule}{4}{section*.10}%
+\contentsline {paragraph}{Frasi relative alle aule}{5}{section*.10}%
 \contentsline {subsection}{\numberline {1.2}Glossario dei Termini}{5}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Operazioni}{5}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Requisiti Aggiuntivi}{6}{subsection.1.4}%
@@ -59,5 +59,7 @@
 \contentsline {subsection}{\numberline {4.4}Vincoli di Integrità Non Implementati}{18}{subsection.4.4}%
 \contentsline {subsubsection}{\numberline {4.4.1}\ref {ic:building_course}}{18}{subsubsection.4.4.1}%
 \contentsline {subsubsection}{\numberline {4.4.2}\ref {ic:responsable_course}}{19}{subsubsection.4.4.2}%
-\contentsline {subsubsection}{\numberline {4.4.3}Elenco vincoli di integrità non implementati}{19}{subsubsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.5}Implementazione delle Operazioni}{19}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.4.3}\ref {ic:degree_course_participation}}{19}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.4}\ref {ic:degree_building_participation}}{19}{subsubsection.4.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.5}\ref {ic:building_room_participation}}{20}{subsubsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.5}Implementazione delle Operazioni}{20}{subsection.4.5}%
