@@ -149,7 +149,7 @@ Ciascun edificio può essere associato al massimo a un solo corso di laurea. Ino
 
 \paragraph{Frasi relative alle lezioni}
 
-Le lezioni vengono tenute in diversi edifici. Si assuma che le lezioni di un dato corso di laurea possano essere tenute in diversi edifici, ma che ogni edificio venga utilizzato da un unico corso di laurea.
+Le lezioni vengono tenute in diversi edifici: le lezioni di un dato corso di laurea possano essere tenute in diversi edifici, ma che ogni edificio venga utilizzato da un unico corso di laurea. Di conseguenza, anche le singole lezioni di uno specifico corso possono svolgersi in strutture differenti, purchè appartenenti agli edifici allocati per quel corso di laurea.
 
 Di ogni lezione vogliamo memorizzare il corso, l'aula, il giorno e la fascia oraria (prima, seconda, terza o quarta).
 
@@ -405,7 +405,7 @@ Pertanto, non possono esistere istanze che siano contemporaneamente docenti e st
 \paragraph{Ciclo \texttt{Docente}-\texttt{Corso}-\texttt{Lezione}-\texttt{Aula}-\texttt{Edificio}-\texttt{Corso di Laurea}-\texttt{Responsabile}}
 \label{cycle:teacher_course_lesson_room_building_degree_resp}
 
-Oltre alle considerazioni svolte nel \nameref{cycle:course_lesson_room_building_degree}, in questo ciclo non è necessario aggiungere ulteriori vincoli di integrità.
+Oltre alle considerazioni svolte nel \nameref{cycle:course_lesson_room_building_degree} e nel \nameref{cycle:teacher_course_degree_resp}, in questo ciclo non è necessario aggiungere ulteriori vincoli di integrità.
 
 
 \paragraph{Ciclo \texttt{Persona}-\texttt{Docente}-\texttt{Corso}-\texttt{Corso di Laurea}-\texttt{Studente}}
@@ -452,29 +452,29 @@ Al fine di dettagliare i vincoli di partecipazione e di ciclo di vita non esprim
 
 \begin{description}[leftmargin=0pt]
 
-    \item[Eliminazione di un docente:] \hfill \\
+    \item[Eliminazione di un docente] \hfill \\
     La rimozione di un docente è vincolata ai suoi corsi: può essere eseguita esclusivamente se il docente non risulta titolare di alcun corso attivo. In caso contrario, l'operazione è bloccata; per procedere alla cancellazione, è necessario assegnare preventivamente un nuovo docente ai corsi interessati.
 
-    \item[Eliminazione di un responsabile:] \hfill \\
-    Un responsabile di un corso di laurea non può essere rimosso direttamente dal sistema. La cancellazione è subordinata alla revoca dall'insegnamento di tutti i suoi corsi e all'assegnazione di un altro responsabile al corso di laurea per il quale risulta responsabile.
+    \item[Eliminazione di un responsabile] \hfill \\
+    Un responsabile di un corso di laurea non può essere rimosso direttamente dal sistema. La cancellazione è subordinata all'assegnazione di uno o più responsabili ai corsi di laurea per i quali risulta responsabile.
 
-    \item[Eliminazione di uno studente:] \hfill \\
+    \item[Eliminazione di uno studente] \hfill \\
     L'istanza relativa a uno studente può essere rimossa dal sistema senza alcun vincolo restrittivo o effetto collaterale sulle altre entità.
 
-    \item[Eliminazione di un corso:] \hfill \\
+    \item[Eliminazione di un corso] \hfill \\
     La rimozione di un corso comporta la cancellazione automatica e in cascata di tutte le singole lezioni ad esso associate e pianificate nel calendario.
 
-    \item[Eliminazione di un corso di laurea:] \hfill \\
+    \item[Eliminazione di un corso di laurea] \hfill \\
     La rimozione di un corso di laurea comporta la cancellazione automatica di tutti i corsi ad esso afferenti e la contestuale rimozione di tutte le relative iscrizioni. Inoltre, per preservare il vincolo di partecipazione totale degli studenti, l'operazione estende la cancellazione in cascata a tutti quegli studenti la cui unica iscrizione attiva era associata al corso di laurea eliminato. Al contrario, la sua rimozione non ha alcun effetto sugli edifici: gli edifici utilizzati per lo svolgimento delle lezioni non devono essere rimossi.
 
-    \item[Eliminazione di una lezione:] \hfill \\
+    \item[Eliminazione di una lezione] \hfill \\
     La rimozione di una singola lezione dal calendario può essere effettuata liberamente, senza alcuna limitazione o conseguenza sistemica sul resto della base di dati.
 
-    \item[Eliminazione di un'aula:] \hfill \\
+    \item[Eliminazione di un'aula] \hfill \\
     La rimozione di un'aula è consentita solo se non vi sono lezioni programmate al suo interno. Qualora siano presenti delle lezioni, l'operazione viene bloccata finché queste non vengono preventivamente ricollocate in altre aule.
 
-    \item[Eliminazione di un edificio:] \hfill \\
-    La rimozione di un edificio comporta necessariamente la cancellazione automatica e in cascata di tutte le aule in esso strutturalmente contenute.
+    \item[Eliminazione di un edificio] \hfill \\
+    La rimozione di un edificio comporta necessariamente la cancellazione automatica e in cascata di tutte le sue aule contenute.
 
 \end{description}
 
@@ -825,7 +825,9 @@ Di seguito si riporta lo schema logico relazionale derivato dallo schema E-R ris
 
 \begin{enumerate}[label=\textbf{Vincolo Integrità \arabic*}:, ref=\textbf{Vincolo Integrità \arabic*}, resume=integrity-constraints, leftmargin=*]
     \item Ogni corso di laurea deve presentare almeno un corso
-    \label{ic:degree_course_participation}    
+    \label{ic:degree_course_participation}
+    \item Ogni corso di laurea deve utilizzare almeno un edificio per svolgere le lezioni
+    \label{ic:degree_building_participation} 
 \end{enumerate}
 
 
@@ -905,13 +907,14 @@ Al fine di mantenere la consistenza della base di dati, sono stati definiti i se
     \item \ref{ic:student_teacher}: un docente non può essere anche uno studente e, viceversa, uno studente non può essere anche un docente.
     \item \ref{ic:student_degree_participation}: ogni studente deve essere iscritto ad almeno un corso di laurea. La rimozione di tutte le iscrizioni di uno studente deve comportarne la sua rimozione.
     \item \ref{ic:degree_course_participation}: ogni corso di laurea deve comprendere almeno un corso.
+    \item \ref{ic:degree_building_participation}: ogni corso di laurea deve utilizzare almento un edifico.
     \item \ref{ic:building_room_participation}: per ogni edificio deve esistere almeno un'aula ad esso associata.
 \end{itemize}
 
 
 \subsubsection{Regole di Derivazione}
 
-Al fine di ottimizzare le prestazioni delle query, è stato introdotto nell'entità \texttt{Corso di Laurea} l'attributo derivato \texttt{n\textsuperscript{o} iscritti}. La relativa regola di derivazione prevede che il valore sia calcolato come conteggio di tutti gli studenti iscritti al medesimo corso di laurea.
+Al fine di ottimizzare le prestazioni delle query, è stato introdotto nell'entità \texttt{Corso di Laurea} l'attributo derivato \texttt{n\textsuperscript{o} iscritti}. La relativa regola di derivazione prevede che il valore sia calcolato come conteggio di tutte le istanze nella relazione \texttt{Iscritto} relative al medesimo corso di laurea.
 
 
 \subsubsection{Domini degli Attributi}
@@ -1101,33 +1104,58 @@ EXECUTE FUNCTION update_student_count();
 
 Tale vincolo richiede che le lezioni di un corso si svolgano esclusivamente in aule appartenenti a edifici associati al corso di laurea a cui il corso appartiene.
 
-L'implementazione del vincolo sarebbe stata realizzata mediante diversi trigger:
+L'implementazione del vincolo viene realizzata mediante i seguenti trigger:
 \begin{itemize}
-    \item Un trigger di tipo \texttt{BEFORE INSERT} avrebbe verificato, prima dell'inserimento di una nuova lezione, che l'istanza nella relazione \texttt{Edificio}, relativa all'edificio in cui viene svolta la lezione, identifichi, nel vincolo inter-relazionale tra \texttt{Edificio} e \texttt{Corso di Laurea}, il medesimo corso di laurea del corso della lezione inserita.
-    \item Un trigger di tipo \texttt{BEFORE UPDATE} avrebbe verificato che se fosse stato modificato il corso della lezione, il nuovo corso appartenga allo stesso corso di laurea di quello precedente, mentre se la modifica faccia riferimento all'aula, sarebbe stato verificato che l'istanza dell'edificio, relativa all'edificio in cui verrà svolta la lezione, identifichi, nel vincolo inter-relazionale, il medesimo corso di laurea del corso della lezione.
-    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Edificio} avrebbe evitato eventuali modifiche agli attributi coinvolti nel vincolo inter-referenziale tra l'entità \texttt{Corso di Laurea}, nel caso in cui l'edificio fosse associato a lezioni programmate.
+    \item Un trigger di tipo \texttt{BEFORE INSERT} applicato alla relazione \texttt{Lezione} che proibisce l'inserimento di una nuova lezione qualora l'edificio in cui essa si svolge risulti associato a un corso di laurea differente rispetto a quello del corso della lezione stessa.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Lezione} che impedisce la modifica del corso qualora il nuovo insegnamento non appartenga al medesimo corso di laurea; parimenti, in caso di modifica dell'aula, il trigger proibisce l'aggiornamento se il corrispondente edificio non risulta allocato al corso di laurea della lezione.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Edificio} che blocca qualsiasi variazione agli attributi coinvolti nel vincolo inter-relazionale con l'entità \texttt{Corso di Laurea} nel caso in cui l'edificio presenti ancora delle lezioni programmate al suo interno.
 \end{itemize}
 
 \subsubsection{\ref{ic:responsable_course}}
 
-Tale vincolo richiede che il docente responsabile di un corso di laurea insegni almeno un corso appartenente a tale corso di laurea.
+Tale vincolo richiede che il docente responsabile di un corso di laurea sia titolare di almeno un corso di insegnamento appartenente a quel medesimo corso di laurea.
 
-L'implementazione del vincolo sarebbe stata realizzata mediante i seguenti trigger:
+L'implementazione del vincolo viene realizzata mediante i seguenti trigger:
 \begin{itemize}
-    \item Un trigger di tipo \texttt{BEFORE INSERT} applicato alla relazione \texttt{Corso di Laurea}, che avrebbe verificato, prima dell'inserimento di un nuovo corso di laurea, l'esistenza di almeno un'istanza nella relazione \texttt{Corso} che appartiene al corso di laurea inserito e che tale istanza identifichi un corso insegnato dal docente responsabile assegnato.
-    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso di Laurea} che avrebbe verificato che, nel caso venisse modificato il riferimento al responsabile, al termine dell'aggiornamento sarebbe stata garantita l'esistenza di almeno un'istanza di un corso appartenente al corso di laurea aggiornato e insegnato dal nuovo docente responsabile.
-    \item Un trigger di tipo \texttt{BEFORE DELETE} applicato alla relazione \texttt{Corso} che avrebbe impedito la cancellazione di un'istanza qualora essa rappresenti l'unico corso insegnato dal responsabile del corso di laurea associato.
-    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che avrebbe verificato che, al termine di un'eventuale modifica degli attributi relativi al vincolo inter-relazionale tra \texttt{Corso} e \texttt{Docente}, ci sia un'istanza di corso che è insegnato dal responsabile del corso di laurea a cui appartiene.
-    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che avrebbe verificato che, al termine di un'eventuale modifica degli attributi relativi al vincolo inter-relazionale tra \texttt{Corso} e \texttt{Corso di Laurea}, ci sia un'istanza di corso che è insegnato dal responsabile del corso di laurea a cui apparteneva il corso prima dell'aggiornamento.
+    \item Un trigger di tipo \texttt{AFTER INSERT} (Constraint Trigger) applicato alla relazione \texttt{Corso di Laurea}, dichiarato come \texttt{DEFERRABLE INITIALLY IMMEDIATE}, che impone il rollback della transazione al momento del \textit{Commit} (previa istruzione di differimento) qualora non esista alcuna istanza nella relazione \texttt{Corso} che sia afferente a tale corso di laurea e contemporaneamente assegnata al docente responsabile indicato.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso di Laurea} che proibisce la variazione del docente responsabile qualora il nuovo docente designato non risulti titolare di almeno un insegnamento all'interno del corso di laurea aggiornato.
+    \item Un trigger di tipo \texttt{BEFORE DELETE} applicato alla relazione \texttt{Corso} che proibisce la rimozione di un'istanza nel caso in cui essa costituisca l'unico corso insegnato dal docente responsabile del corso di laurea associato.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che impedisce la modifica degli attributi relativi al vincolo inter-relazionale tra \texttt{Corso} e \texttt{Docente} nel caso in cui il docente di origine sia il responsabile del corso di laurea e questo rappresenti il suo unico corso attivo.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che blocca la modifica degli attributi relativi al vincolo inter-relazionale tra \texttt{Corso} e \texttt{Corso di Laurea} nel caso in cui il trasferimento del corso lasci il corso di laurea di origine privo di insegnamenti coperti dal proprio docente responsabile.
 \end{itemize}
 
-\subsubsection{Elenco vincoli di integrità non implementati}
+\subsubsection{\ref{ic:degree_course_participation}}
+
+Tale vincolo richiede che ogni corso di laurea presenti almeno un corso nel proprio piano di studi.
+
+L'implementazione del vincolo viene realizzata mediante i seguenti trigger:
 \begin{itemize}
-    \item Quando viene inserita o modificata una lezione, controllare che al corso a lei assegnato sia associato un docente
-    \item Quando si cancella un docente controllare non abbia lezioni
-    \item Quando si crea un corso di Laurea è necessario assegnare/creare nuovo edificio
-    \item Quando si crea un edificio, va assegnata/creata aula
-    \item Quando si cancella edificio bisogna controllare che non sia l'ultimo edificio assegnato al suo corso di Laurea
+    \item Un trigger di tipo \texttt{AFTER INSERT} (Constraint Trigger) applicato alla relazione \texttt{Corso di Laurea}, dichiarato come \texttt{DEFERRABLE INITIALLY IMMEDIATE}, che impone il rollback della transazione al momento del \textit{Commit} (previa istruzione di differimento) qualora non sia presente almeno un'istanza nella relazione \texttt{Corso} che si riferisce al corso di laurea appena inserito.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Corso} che impedisce il trasferimento di un corso a un differente corso di laurea nel caso in cui il corso di laurea di origine rimanga privo di corsi attivi.
+    \item Un trigger di tipo \texttt{BEFORE DELETE} applicato alla relazione \texttt{Corso} che proibisce la rimozione di un'istanza nel caso in cui essa costituisca l'unico insegnamento rimasto associato a quel determinato corso di laurea.
+\end{itemize}
+
+\subsubsection{\ref{ic:degree_building_participation}}
+
+Tale vincolo richiede che ogni corso di laurea utilizzi almeno un edificio per lo svolgimento delle sue lezioni.
+
+L'implementazione del vincolo viene realizzata mediante i seguenti trigger:
+\begin{itemize}
+    \item Un trigger di tipo \texttt{AFTER INSERT} (Constraint Trigger) applicato alla relazione \texttt{Corso di Laurea}, dichiarato come \texttt{DEFERRABLE INITIALLY IMMEDIATE}, che impone il rollback della transazione al momento del \textit{Commit} (previa istruzione di differimento) qualora non sia presente almeno un'istanza nella relazione \texttt{Edificio} che si riferisce all'corso di laurea appena inserito.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Edificio} che impedisce la modifica del riferimento all'corso di laurea nel caso in cui il corso di laurea di provenienza rimanga privo di edifici.
+    \item Un trigger di tipo \texttt{BEFORE DELETE} applicato alla relazione \texttt{Edificio} che proibisce la cancellazione di un'istanza qualora essa rappresenti l'ultimo edificio rimasto utilizzato dal corso di laurea di riferimento.
+\end{itemize}
+
+
+\subsubsection{\ref{ic:building_room_participation}}
+
+Tale vincolo richiede che ogni edificio registrato presenti almeno un'aula associata.
+
+L'implementazione del vincolo viene realizzata mediante i seguenti trigger:
+\begin{itemize}
+    \item Un trigger di tipo \texttt{AFTER INSERT} (Constraint Trigger) applicato alla relazione \texttt{Edificio}, dichiarato come \texttt{DEFERRABLE INITIALLY IMMEDIATE}, che impone il rollback della transazione al momento del \textit{Commit} (previa istruzione di differimento) qualora non sia presente almeno un'istanza nella relazione \texttt{Aula} che si riferisce all'edificio appena inserito.
+    \item Un trigger di tipo \texttt{BEFORE UPDATE} applicato alla relazione \texttt{Aula} che impedisce la modifica del riferimento all'edificio nel caso in cui l'edificio di provenienza rimanga privo di aule a seguito del trasferimento.
+    \item Un trigger di tipo \texttt{BEFORE DELETE} applicato alla relazione \texttt{Aula} che proibisce la cancellazione di un'istanza qualora essa rappresenti l'ultima e unica aula rimasta all'interno dell'edificio di riferimento.
 \end{itemize}
 
 \subsection{Implementazione delle Operazioni}

@@ -295,9 +295,7 @@ INSERT INTO Corso (nome, corso_di_laurea, docente) VALUES
 ('Deep learning', 'Artificial Intelligence & Cybersecurity', 'LBRFNC90D22H501L'),
 ('Machine Learning', 'Internet of Things, Big Data, Machine Learning', 'MNTLRA85H08L219K'),
 ('Basi di Dati', 'Internet of Things, Big Data, Machine Learning', 'PZZCRL99P15L219X');
-COMMIT;
 
-START TRANSACTION;
 INSERT INTO Edificio (nome, indirizzo, telefono, corso_di_laurea) VALUES
 ('Rizzi', 'Via delle Scienze, 206', '0611122233', 'Informatica'),
 ('Aule Feruglio', 'Via delle Scienze, 212, piano 0', '0644455566', 'Informatica'),
@@ -439,7 +437,6 @@ INSERT INTO Lezione (corso, corso_di_laurea, giorno, fascia_oraria, aula, edific
 ('Calcolo Scientifico', 'Informatica', '2026-04-16', 'quarta', 'C1', 'Rizzi'),
 ('Basi di Dati', 'Internet of Things, Big Data, Machine Learning', '2026-04-17', 'prima', 'Aula 1', 'Edificio Torre'),
 ('Logica', 'Matematica', '2026-04-17', 'seconda', 'Sala 5', 'Villa Mirafiori');
-COMMIT;
 
 -- queries
 
